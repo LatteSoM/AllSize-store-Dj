@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row sep align-items-center justify-content-between btn_mobile">
+{#        <button class="navbtnss" href="{% url 'all_gds_page' %}">#}
+{#            Новинки#}
+{#        </button>#}
+        <a href="{% url 'all_gds_page' %}" class="nawhrefs d-flex justify-content-center navbtnss"><button class="navbtnss all_br">Новинки</button></a>
+
+{#        <button class="navbtnss" href="{% url 'brands' %}">#}
+{#            Бренды#}
+{#        </button>#}
+        <a href="{% url 'brands' %}" class="nawhrefs d-flex justify-content-center navbtnss"><button class="navbtnss all_br">Бренды</button></a>
+{#        <button class="navbtnss" href="{% url 'sale_page' 'sale' %}">#}
+{#            Скидки#}
+{#        </button>#}
+        <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs d-flex navbtnss"><button class="navbtnss all_br">Скидки</button></a>
+    </div>
+
+    {% include 'MainApp/inc/_new_arrival.html' with descr=descr huge_card=huge_card%}
+
+    <div class="row d-flex justify-content-center align-items-center">
+        <h1 class="d-flex col-12 justify-content-center">Новые поступления</h1>
+    </div>
+
+    <div class="row justify-content-center align-items-center sep d-flex allbranditemcont">
+        {% for good in mian_cards  %}
+            {% include 'MainApp/inc/_card_item.html' with good=good %}
+        {% endfor %}
+    </div>
+
+    <div class="row d-flex justify-content-center align-items-center sep gap-3">
+        <h1 class="d-flex col-12 justify-content-center">Наши Бренды</h1>
+        {% for brand in brands %}
+            {% include 'MainApp/inc/_mainbrand_card.html' %}
+        {% endfor %}
+
+
+        <div class="row sep align-items-center justify-content-center btn_mobile">
+            <a href="{% url 'brands' %}" class="nawhrefs d-flex justify-content-center"><button class="navbtnss all_br">Все бренды</button></a>
+{#            <button class="navbtnss all_br">Все бренды</button>#}
+        </div>
+
+    </div>
+    <div class="row d-flex justify-content-center align-items-center sep gap-3">
+        <h1 class="d-flex col-12 justify-content-center">Популярные категроии</h1>
+    </div>
+
+    <div class="row justify-content-center gap-4 align-items-center sep">
+        {% for i in category %}
+            {% include 'MainApp/inc/_category_card.html' with cateory_name='Название' %}
+        {% endfor %}
+
+    </div>
+
+    <!-- тут была больщая карта -->
+
+
+    <div class="row d-flex justify-content-center align-items-center">
+        <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs"><h1 class="d-flex col-12 justify-content-center">Скидки</h1></a>
+    </div>
+
+    <div class="row justify-content-center align-items-center sep d-flex allbranditemcont">
+        {% for good in sale  %}
+            {% include 'MainApp/inc/_card_item.html' with good=good %}
+        {% endfor %}
+    </div>
+{% endblock %}

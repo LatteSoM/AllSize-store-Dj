@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center align-items-center sep fict">
+         {% for cat in category %}
+            {% include 'MainApp/inc/_cat_card.html' with cat_name=cat.category_name brand=category.brand %}
+         {% endfor %}
+    </div>
+{% endblock %}

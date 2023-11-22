@@ -1,0 +1,106 @@
+{% load static %}
+
+<header class="header" style="z-index: 4">
+    <div class="shapka container-fluid">
+        <div class="container">
+
+            <div class="row justify-content-between align-items-center mobil">
+                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                    <img src="{% static 'project/img/BurgeNav.svg' %}" alt="burgerNav">
+                </button>
+
+                <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                    <div class="offcanvas-header">
+                        <!-- <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+                         -->
+                         <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-center" >
+                            <h1 class="txtlogo">
+                                ALL SIZE
+                            </h1>
+                        </a>
+                        <button type="button" class="btn-close" onclick="click_close()" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="burger__menu">
+                            <ul>
+                                <li><a href="{% url 'brands' %}" class="nawhrefs"><h5>Бренды</h5></a></li>
+                                <li> <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs"><h5>Скидки</h5></a></li>
+                                <li><a href="{% url 'all_gds_page' %}" class="nawhrefs"><h5>Новинки</h5></a></li>
+                                <li><a href="{% url 'wishlist_page' %}" class="nawhrefs"><h5>Избранное</h5></a></li>
+                                <li><a href="{% url 'busket_page' %}" class="nawhrefs"><h5>Корзина</h5></a></li>
+{#                                <li><h3>О нас</h3></li>#}
+{#                                <li><h3>Отзывы</h3></li>#}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="navpanel col-3">
+                    <a href="{% url 'brands' %}" class="nawhrefs">
+                        <h5>
+                            Бренды
+                        </h5>
+                    </a>
+                    <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs">
+                        <h5>
+                            Скидки
+                        </h5>
+                    </a>
+                    <a href="{% url 'all_gds_page' %}" class="nawhrefs">
+                        <h5>
+                            Новинки
+                        </h5>
+                    </a>
+                </nav>
+                <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-center" >
+                    <h1 class="txtlogo">
+                        ALL SIZE
+                    </h1>
+                </a>
+                <div class="searc__ico col-1 justify-content-center align-items-center">
+                    <a href="#"><img src="{% static 'project/img/search.svg' %}" class="icontip" alt="search"></a>
+                </div>
+                <div class="icons col-3">
+                    <a href="#">
+                        <img src="{% static 'project/img/search.svg' %}" alt="search" class="icon">
+                    </a>
+                    <a href="{% url 'wishlist_page' %}">
+                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icon">
+                    </a>
+                    <a href="{% url 'busket_page' %}">
+                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icon">
+                    </a>
+{#                    <a href="../html/registration.html">#}
+{##}
+{#                        <img src="../img/profile.svg" alt="profile"  class="icon">#}
+{#                    </a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+ <script type="text/javascript">
+
+        function click_open() {
+
+            setTimeout(1000)
+            let burger = document.querySelector("#offcanvasTop")
+            let slider = document.querySelector("#carouselExample")
+            console.log(burger.classList.contains("showing"))
+            console.log(slider)
+            console.log(burger.classList)
+            if (burger.classList.contains("showing")) slider.style.display = "none"
+            else slider.style.display = "block"
+
+
+        }
+        function click_close(){
+             setTimeout(1000)
+            let burger = document.querySelector("#offcanvasTop")
+            let slider = document.querySelector("#carouselExample")
+            console.log(burger.classList.contains("showing"))
+            console.log(slider)
+            console.log(burger.classList)
+            if (burger.classList.contains("hiding")) slider.style.display = "block"
+        }
+    </script>
+</header>

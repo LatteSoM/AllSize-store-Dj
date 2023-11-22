@@ -1,0 +1,11 @@
+<a href="/nike/gds/{{ good.id | default:'1' }}" class="cards col-2">
+    <div class="imgcont">
+        <img src="{{ good.main_pic.url }}" alt="">
+{#        <img src="/media/image/2023-07-10-11-53-58.jpg" alt="">#}
+    </div>
+    <div class="cardtext">
+        <h3 class="cardbrand">{{ good.brand_id }}</h3>
+        <h5 class="carddescr">{{ good.model_name }}</h5>
+        <h4 class="cardprice">{{ good.price }}</h4>
+    </div>
+</a>

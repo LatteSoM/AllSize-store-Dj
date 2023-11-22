@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="">Избранное</h1>
+    <div class="row d-flex align-items-center sep">
+        <div class="d-flex wishlistcardscontainer col-12 sep align-items-center justify-content-center">
+
+            {% for good in goods  %}
+                {% include 'wishlist/inc/_wish_card.html' with good=good %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <h1>Вам так-же может понравиться</h1>
+
+    <div class="row justify-content-center align-items-center sep d-flex allbranditemcont">
+
+{#        {% for i in crd_count  %}#}
+{#            {% include 'MainApp/inc/_card_item.html' with  %}#}
+{#        {% endfor %}#}
+         {% for good in mian_cards  %}
+            {% include 'MainApp/inc/_card_item.html' with good=good %}
+         {% endfor %}
+    </div>
+{% endblock %}

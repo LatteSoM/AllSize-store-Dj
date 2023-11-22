@@ -1,0 +1,103 @@
+<div class="offcanvas offcanvas-start" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Продвинутые параметры поиска</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body mybod">
+        <div class="chbxcont">
+            <p class="cardbrand">Пол:</p>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Женское
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Мужское
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Унисекс
+                </label>
+            </div>
+        </div>
+        <hr>
+
+
+
+
+
+        <form method="GET" id="total_filter">
+            <div class="chbxcont">
+                <p class="cardbrand">По цене:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="cheaper" id="id_cheaper">
+                    <label for="id_cheaper">до 7000р</label>
+
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="medium" id="id_medium">
+                    <label for="id_medium">7000р - 10000р</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prem" id="id_prem">
+                    <label for="id_prem">10000р и выше</label>
+                </div>
+            </div>
+{#            {{ price.as_p }}#}
+            <hr>
+
+             <div class="chbxcont">
+                <p class="cardbrand">Скидки:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="id_on_sale" name="on_sale">
+                    <label class="form-check-label" for="id_on_sale">товары со скидкой</label>
+                </div>
+
+
+            </div>
+            <hr>
+            <div class="chbxcont">
+
+                <p class="cardbrand">По категории:</p>
+
+    {#              {% csrf_token %}#}
+
+                {% for field in form %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="{{ field.id_for_label }}" name="{{ field.html_name }}">
+                      <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    </div>
+                {% endfor %}
+                {#    хуй#}
+
+            </div>
+            <hr>
+
+             <div class="prodbtncont">
+             {% for fiel in sizes  %}
+                <div class="sizebtn">
+                  <input class="form-check-input" type="checkbox" id="{{ fiel.id_for_label }}" name="{{ fiel.html_name }}">
+                  <label class="form-check-label" for="{{ fiel.id_for_label }}">{{ fiel.label }}</label>
+                </div>
+             {% endfor %}
+
+        </div>
+
+        </form>
+        <div class="d-flex justify-content-center">
+
+            <button type="submit" form="total_filter" class="btn btn-primary wishcardbtn">Сортировать</button>
+        </div>
+
+
+
+
+    </div>
+</div>

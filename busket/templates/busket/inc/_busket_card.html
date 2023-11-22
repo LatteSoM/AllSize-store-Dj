@@ -1,0 +1,52 @@
+{% load static %}
+<div class="bagcard col-12">
+        <div class="bagimgcont col-3">
+            <img src="{{ good.main_pic.url }}" alt="">
+        </div>
+
+        <div class="textbagcont col-7 col-lg-8 gap-0">
+            <div class="bordcont">
+                <div class="bagpricecont">
+                    <h3 class="bagcardbrand">{{ good.brand_id }}</h3>
+                </div>
+                <h4>{{ good.price }} руб</h4>
+            </div>
+            <h5 class="bagcarddescr">{{ good.model_name }}</h5>
+            <h5 class="bagcarddescr">{{ good.color_id }}</h5>
+            <div class="btnsss d-flex gap-5">
+                <div class="btntext">Размер: {{ good.size }}</div>
+
+{#                <div class="dropdown-center">#}
+{#                    <button class="bagbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                        <div class="btntext">Размер: {{ good.size }}</div>#}
+{#                    </button>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a class="dropdown-item" href="#">42.5EU</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">41.EU</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">43.5EU</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+                <div class="btntext">кол-во: {{ good.quantity }} </div>
+
+{#                <div class="dropdown-center">#}
+{##}
+{#                    <button class="bagbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                        <div class="btntext">{{ good.quantity }} </div>#}
+{#                    </button>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a class="dropdown-item" href="#">1</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">2</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">3</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+            </div>
+        </div>
+        <div class="bagicons">
+            <form method="POST" action="{% url 'delete_good' good.id good.size  %}">
+                {% csrf_token %}
+{#                {{ form.as_p }}#}
+                <input type="image" src="{% static 'project/img/trash.svg' %}">
+            </form>
+{#            <a href="#"><img src="{% static 'project/img/trash.svg' %}" alt="remove" class="iconBtn"></a>#}
+        </div>
+    </div>

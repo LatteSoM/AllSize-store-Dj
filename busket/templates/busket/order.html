@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row d-flex align-items-center justify-content-center sep">
+        <div class="ordprevcard col-12">
+            <div class="ordprevtxt">
+                <h2>Предпросмотр заказа</h2>
+                <hr>
+            </div>
+            <div class="ordposcont">
+                {% for good in goods %}
+                    <div class="prevwishcard col-4">
+                        <div class="prevwishlistimg">
+                            <img src="{{ good.main_pic.url }}" alt="">
+                        </div>
+                        <div class="prevwishcardinf">
+                            <h3 class="cardbrand">{{ good.brand_id }}</h3>
+                            <h5 class="carddescr">{{ good.model_name }}</h5>
+                            <h4 class="cardprice"> Цена: {{ good.price }}</h4>
+                            <h5 class="carddescr">Размер: {{ good.size }}</h5>
+                        </div>
+                    </div>
+                {% endfor %}
+
+{#                <div class="prevwishcard col-4">#}
+{#                    <div class="prevwishlistimg">#}
+{#                        <img src="../img/Данки/Данки/Nike Dunk Low 'Year of the Rabbit - Fossil Stone'/2023-07-10 10-37-20.webp" alt="">#}
+{#                    </div>#}
+{#                    <div class="prevwishcardinf">#}
+{#                        <h3 class="cardbrand">Бренд</h3>#}
+{#                        <h5 class="carddescr">Название модели</h4>#}
+{#                        <h4 class="cardprice">999$</h5>#}
+{#                        <h5 class="carddescr">Размер: 43EU</h4>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+            <div class="ordprevtxt">
+{#                <form method="POST">#}
+{#                    {% csrf_token %}#}
+{#                    {{ form.as_p }}#}
+{#                     <p>#}
+{#                        <label for="id_name">Имя:</label>#}
+{#                        <input type="text" name="name" maxlength="100" required="" id="id_name">#}
+{#                      </p>#}
+{#                      <ul class="errorlist"><li>This field is required.</li></ul>#}
+{#                      <p>#}
+{#                        <label for="id_phone_number">Номер телефона:</label>#}
+{#                        <input type="text" name="phone_number" maxlength="18" required="" id="id_phone_number">#}
+{#                      </p>#}
+{#                    <input type="submit" value="заказать">#}
+{##}
+{#                </form>#}
+                <hr>
+                <h4> Итого к оплате: {{ total }} руб
+                    <span><br></span>
+                    Способ оплаты: При получении
+                </h4>
+                <form method="POST" id="make_order">
+                    {% csrf_token %}
+                    <hr>
+                    <h4><label for="id_name">Имя:</label>
+                        <span><br></span>
+                        <input type="text" name="name" maxlength="100" required="" id="id_name" style="border-radius: 12px">
+                    </h4>
+                    <hr>
+                    <h4><label for="id_phone_number">Номер телефона:</label>
+                        <span><br></span>
+                        <input type="text" name="phone_number" maxlength="18" required="" id="id_phone_number" style="border-radius: 12px">
+                    </h4>
+                </form>
+                <h4> Для чего нам эти данные?
+                    <span><br></span>
+                     После оформления заказа, с вами свяжется менеджер для уточнения деталей заказа
+                </h4>
+
+            </div>
+        </div>
+        <div class="row sep align-items-center justify-content-center">
+            <input class="navbtnss get_ord" type="submit" value="Заказать" form="make_order">
+{#            <button class="navbtnss get_ord">#}
+{#                Заказать#}
+{#            </button>#}
+        </div>
+    </div>
+{% endblock %}

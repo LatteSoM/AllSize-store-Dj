@@ -1,0 +1,46 @@
+<a href="/nike/gds/{{ good.id | default:'1' }}" class="row sep spce align-items-center justify-content-center">
+    <div class="hugecard col-12">
+        <div class="hugecardimg col-8">
+            <img src="{{ huge_card.main_pic.url }}" alt="">
+        </div>
+        <div class="txtgrphgcard">
+            <h2 class="carddescr">Новое поступление</h2>
+            <br>
+            <h2 class="cardbrand">{{ huge_card.brand_id }}</h2>
+            <br>
+            <h5 class="carddescr">
+                {{ huge_card.model_name }}
+                {{ descr }}
+            </h5>
+            <br>
+            <h2 class="carddescr">Смотреть</h2>
+
+        </div>
+    </div>
+</a>
+
+{#<div class="row sep spce align-items-center justify-content-center">#}
+{#    <div class="hugecard col-12">#}
+{#        <div class="hugecardimg col-8">#}
+{#            <img src="../img/Данки/Данки/Nike Dunk Low 'Lemon Drop'/2023-07-10 10-21-05 (1).webp" alt="">#}
+{#            <img src="{{ huge_card.main_pic.url }}" alt="">#}
+{##}
+{#        </div>#}
+{#        <div class="txtgrphgcard">#}
+{#            <h2>Новое поступление</h2>#}
+{#            <br>#}
+{#            <h2 class="cardbrand">{{ huge_card.brand_id }}</h2>#}
+{#            <br>#}
+{#            <h5 class="carddescr">#}
+{#                Nike x Carchart Air Force 1 Low#}
+{#                {{ huge_card.model_name }}#}
+{#                {{ descr }}#}
+{#                Сочетания монументального дизайна#}
+{#                и Легендарного качества#}
+{#            </h5>#}
+{#            <br>#}
+{#            <h2>Смотреть</h2>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

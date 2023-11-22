@@ -1,0 +1,813 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row justify-content-between align-items-center">
+        <div class="sortfield">
+            <h2>Ассортимент {{ Brand_name  }}</h2>
+            <div class="right_btn_grp">
+                <button class="sortbtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                    <div class="btntextwish">Показать фильтры</div>
+                    <img class="iconBtn" src="{% static 'project/img/filters.svg' %}" alt="">
+                </button>
+
+                <div class="dropdown-center">
+                    <button class="sortbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="btntextwish">Сортировать по:</div>
+                    </button>
+                    <ul class="dropdown-menu">
+{#                      <li><a class="dropdown-item" href="#">дороже</a></li>#}
+{#                      <li><a class="dropdown-item" href="#">новое</a></li>#}
+{#                      <li><a class="dropdown-item" href="#">дешевле</a></li>#}
+
+                        <li><form method="POST" action="{% url 'button' %}">
+                            {% csrf_token %}
+                            <input class="sortbtn btntextwish" type="submit" name="expensive" value="дороже"/>
+                        </form></li>
+                        <li><form method="POST" action="{% url 'button' %}">
+                            {% csrf_token %}
+                            <input class="sortbtn btntextwish" type="submit" name="cheaper" value="дешевле"/>
+                        </form></li>
+                        <li><form method="POST" action="{% url 'button' %}">
+                            {% csrf_token %}
+                            <input class="sortbtn btntextwish" type="submit" name="sale" value="скидка"/>
+                        </form></li>
+                    </ul>
+                </div>
+
+                {% include 'MainApp/inc/_side_menue.html' with form=form sizes=sizes sale=sale price=price  %}
+
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex align-items-center justify-content-center allbranditemcont">
+        {% for good in goods  %}
+            {% include 'MainApp/inc/_card_item.html' with good=good  %}
+        {% endfor %}
+    </div>
+{% endblock %}
+{##}
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#    <div class="row justify-content-between align-items-center">#}
+{#                        <div class="sortfield">#}
+{#                            <h2>Модельный ряд Nike (123)</h2>#}
+{#                            <div class="right_btn_grp">#}
+{#                                <!-- <button class="sortbtn" type="button">#}
+{#                                    <div class="btntextwish">Показать фильтры</div>#}
+{#                                    <img class="iconBtn" src="../img/filters.svg" alt="filter">#}
+{#                                </button> -->#}
+{#                                <button class="sortbtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">#}
+{#                                    <div class="btntextwish">Показать фильтры</div>#}
+{#                                    <img class="iconBtn" src="../img/filters.svg" alt="filter">#}
+{#                                </button>#}
+{##}
+{#                                <div class="dropdown-center">#}
+{#                                    <button class="sortbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                                        <div class="btntextwish">Сортировать по:</div>#}
+{#                                    </button>#}
+{#                                    <ul class="dropdown-menu">#}
+{#                                      <li><a class="dropdown-item" href="#">дороже</a></li>#}
+{#                                      <li><a class="dropdown-item" href="#">новое</a></li>#}
+{#                                      <li><a class="dropdown-item" href="#">дешевле</a></li>#}
+{#                                    </ul>#}
+{#                                </div>#}
+{##}
+{#                                <div class="offcanvas offcanvas-start" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">#}
+{#                                    <div class="offcanvas-header">#}
+{#                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Продвинутые параметры поиска</h5>#}
+{#                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                    <div class="offcanvas-body mybod">#}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">Пол:</p>#}
+{##}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Женское#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Мужское#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  Унисекс#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">По цене:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  0-7000р#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  7000-10000р#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  10000р+#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">Скидки:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  На товар есть скидка#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">По цене:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Dunk#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Air-Force#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  Cortez#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="prodbtncont">#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                        </div>#}
+{##}
+{##}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#    <div class="row d-flex align-items-center justify-content-center allbranditemcont">#}
+{##}
+{#                        <!-- <div class="cards">#}
+{#                            <div class="imgcontit">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Brand</h3>#}
+{#                                <h5 class="carddescr">Description about anit</h4>#}
+{#                                <div class="cardcontbot">#}
+{#                                    <h4 class="cardprice">999$</h5>#}
+{##}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <input id="heart" type="checkbox" />#}
+{#                                        <label for="heart">❤</label>#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div> -->#}
+{##}
+{#                        <div class="cards col-6">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards col-6">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#    #}
+{#{% endblock %}#}
+{##}
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Document</title>#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">#}
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>#}
+{#    <link href="{% static 'MainApp/css/main.css'%}" rel="stylesheet" type="text/css">#}
+{#    <link href="{% static 'MainApp/css/layout.css'%}" rel="stylesheet" type="text/css">#}
+{#    <link href="{% static 'MainApp/font/stylesheet.css'%}" rel="stylesheet" type="text/css">#}
+{#</head>#}
+{#<body>#}
+{#    <div class="wrapper">#}
+{#        <header class="header">#}
+{#            <div class="shapka container-fluid">#}
+{#                <div class="container">#}
+{##}
+{##}
+{#                </div>#}
+{#            </div>#}
+{#        </header>#}
+{#        <main class="main">#}
+{#            <div class="container-fluid">#}
+{#                <div class="container">#}
+{#                    <div class="row justify-content-between align-items-center">#}
+{#                        <div class="sortfield">#}
+{#                            <h2>Модельный ряд Nike (123)</h2>#}
+{#                            <div class="right_btn_grp">#}
+{#                                <!-- <button class="sortbtn" type="button">#}
+{#                                    <div class="btntextwish">Показать фильтры</div>#}
+{#                                    <img class="iconBtn" src="../img/filters.svg" alt="filter">#}
+{#                                </button> -->#}
+{#                                <button class="sortbtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">#}
+{#                                    <div class="btntextwish">Показать фильтры</div>#}
+{#                                    <img class="iconBtn" src="../img/filters.svg" alt="filter">#}
+{#                                </button>#}
+{##}
+{#                                <div class="dropdown-center">#}
+{#                                    <button class="sortbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                                        <div class="btntextwish">Сортировать по:</div>#}
+{#                                    </button>#}
+{#                                    <ul class="dropdown-menu">#}
+{#                                      <li><a class="dropdown-item" href="#">дороже</a></li>#}
+{#                                      <li><a class="dropdown-item" href="#">новое</a></li>#}
+{#                                      <li><a class="dropdown-item" href="#">дешевле</a></li>#}
+{#                                    </ul>#}
+{#                                </div>#}
+{##}
+{#                                <div class="offcanvas offcanvas-start" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">#}
+{#                                    <div class="offcanvas-header">#}
+{#                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Продвинутые параметры поиска</h5>#}
+{#                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                    <div class="offcanvas-body mybod">#}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">Пол:</p>#}
+{##}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Женское#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Мужское#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  Унисекс#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">По цене:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  0-7000р#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  7000-10000р#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  10000р+#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">Скидки:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  На товар есть скидка#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="chbxcont">#}
+{#                                            <p class="cardbrand">По цене:</p>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Dunk#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                                <label class="form-check-label" for="flexCheckDefault">#}
+{#                                                  Air-Force#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                            <div class="form-check">#}
+{#                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>#}
+{#                                                <label class="form-check-label" for="flexCheckChecked">#}
+{#                                                  Cortez#}
+{#                                                </label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <hr>#}
+{##}
+{#                                        <div class="prodbtncont">#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                            <button class="sizebtn">#}
+{#                                                <!-- <div class="btntextsize">41.5 EU</div> -->#}
+{#                                                <h5>41.5 EU</h5>#}
+{#                                            </button>#}
+{#                                        </div>#}
+{##}
+{##}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <div class="row d-flex align-items-center justify-content-center allbranditemcont">#}
+{##}
+{#                        <!-- <div class="cards">#}
+{#                            <div class="imgcontit">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Brand</h3>#}
+{#                                <h5 class="carddescr">Description about anit</h4>#}
+{#                                <div class="cardcontbot">#}
+{#                                    <h4 class="cardprice">999$</h5>#}
+{##}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <input id="heart" type="checkbox" />#}
+{#                                        <label for="heart">❤</label>#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div> -->#}
+{##}
+{#                        <div class="cards col-6">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards col-6">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="cards">#}
+{#                            <div class="imgcont">#}
+{#                                <img src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" alt="">#}
+{#                            </div>#}
+{#                            <div class="cardtext">#}
+{#                                <h3 class="cardbrand">Бренд</h3>#}
+{#                                <h5 class="carddescr">Описание товара</h4>#}
+{#                                <h4 class="cardprice">999$</h5>#}
+{#                                <!-- <div class="cardcontbot">#}
+{#                                    <div class="favoriteicocont">#}
+{#                                        <a href="#"><img src="../img/heart.svg" alt="favorites" class="iconBtn"></a>#}
+{#                                    </div>#}
+{#                                </div> -->#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        </main>#}
+{#        <footer class="footer">#}
+{##}
+{#        </footer>#}
+{##}
+{##}
+{#    </div>#}
+{#</body>#}
+{#</html>#}

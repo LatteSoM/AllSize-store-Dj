@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="">Корзина</h1>
+    <div class="row d-flex align-items-top sep">
+        <div class="d-flex bagcartcontainer sep align-items-center col-md-8">
+            {% for good in goods %}
+                    {% include 'busket/inc/_busket_card.html' with good=good form=form %}
+            {% endfor %}
+        </div>
+        <div class="totalcard col-md-4 sep">
+            <div class="txtgroupsub">
+                <h1>Итог:</h1>
+                <div class="grplk">
+                    <h3>Товары:</h3> <h3>{{ total }} руб</h3>
+                </div>
+{#                <div class="grplk">#}
+{#                    <h3>Доставка:</h3> <h3> $</h3>#}
+{#                </div>#}
+                <hr>
+                <div class="grplk">
+                    <h3>К оплате:</h3> <h3> {{ total }} руб</h3>
+                </div>
+                <hr>
+            </div>
+            <form method="POST" action="{% url 'order' %}">
+                {% csrf_token %}
+                <button type="submit" class="checkoutbtn col-12" href="{% url 'order' %}">Заказать</button>
+
+            </form>
+        </div>
+    </div>
+    <style>
+
+    </style>
+    <h1>Вещи у вас в избранном:</h1>
+
+    <div class="row d-flex align-items-top gap-3 sep cartcont justify-content-start .scroll" style=" ">
+
+        {% for good in fav  %}
+            {% include 'wishlist/inc/_wish_card.html' with good=good%}
+        {% endfor %}
+
+    </div>
+    <h1>Вам так-же может понравится:</h1>
+
+    <div class="row justify-content-center align-items-center sep d-flex allbranditemcont">
+{#         {% for i in crd_count  %}#}
+{#            {% include 'MainApp/inc/_card_item.html' with ing_src="../img/Данки/Данки/Nike Dunk Low 'Archeo Pink'/2023-07-10 10-22-36 (1).webp" brand='Брэнд' descr='Описание товара' price='999$' %}#}
+{#        {% endfor %}#}
+        {% for good in mian_cards  %}
+            {% include 'MainApp/inc/_card_item.html' with good=good %}
+        {% endfor %}
+    </div>
+{% endblock %}

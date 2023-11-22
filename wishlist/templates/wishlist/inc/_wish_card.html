@@ -1,0 +1,49 @@
+{% load static %}
+<div class="wishcard col-4">
+    <div class="wishlistimg">
+        <img src="{{ good.main_pic.url }}" alt="">
+    </div>
+    <div class="wishcardinf">
+        <div class="wishtrashcont">
+            <h3 class="cardbrand">{{ good.brand.id }}</h3>
+            <form method="POST" action="{% url 'delete_fav' good.id  %}">
+                {% csrf_token %}
+{#                {{ form.as_p }}#}
+                <input type="image" src="{% static 'project/img/trash.svg' %}"/>
+            </form>
+{#            <form method="POST">#}
+{#                #}
+{#            </form>#}
+{#            <div class="favoriteicocont">#}
+{#                <a href="#"><img src="{% static 'project/img/trash.svg' %}" alt="favorites" class="iconBtn"></a>#}
+{#            </div>#}
+        </div>
+        <h4 class="carddescr">{{ good.model_name }}</h4>
+        <h4 class="cardprice">{{ good.price }}$</h4>
+        <form method="GET" action="">
+            <input type="hidden" name="goods_id" value="{{ good.id }}">
+            <select name="size" class="wishcardbtn">
+                {% for size in add_form  %}
+                    <option value="{{ size.label }}">{{ size.label }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="wishcardbtn" value="В корзину" />
+
+        </form>
+
+{#        <div class="dropdown-center">#}
+{#            <button class="wishcardbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                <div class="btntextwish">Размер: 43EU</div>#}
+{#                <!-- <a href="#"><img src="../img/wtarrowdown.svg" alt="arrow" class="iconBtn"></a> -->#}
+{#            </button>#}
+{#            <ul class="dropdown-menu">#}
+{#              <li><a class="dropdown-item" href="#">42.5EU</a></li>#}
+{#              <li><a class="dropdown-item" href="#">41.EU</a></li>#}
+{#              <li><a class="dropdown-item" href="#">43.5EU</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#        <button class="wishcardbtn" type="submit" form="{{ add_form }}">#}
+{#            <div class="btntextwish">В корзину</div>#}
+{#        </button>#}
+    </div>
+</div>
