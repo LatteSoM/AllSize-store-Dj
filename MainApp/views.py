@@ -240,29 +240,20 @@ def item_view(request, brand, item_id):
     good = Goods.objects.get(id=item_id)
     # create_sizes_to_good(good.pk, ('40', '47'))
     # create_images(good.pk, 'C:/Users/LinQuid/Downloads/1 джорданые низкие/1 джорданые низкие/Air Jordan 1 Low White Camo (36-46) 10.490₽/')
-    form = SizeForm(good.pk)
+    print(good.pk, "<--- Good PK")
+    form = SizeForm(request.GET, model_name=good.pk)
     favorite_form = FavoritesForm(request.GET)
 
     goods = get_cart_goods(request)
     count = len(goods)
-
-    context = {
-        'good': good,
-        'form': form,
-        'imgages': Images.objects.filter(good_id=good.id),
-        'favorite': favorite_form,
-        'cart_count': count,
-    }
-    print(form.fields)
-    print(form.is_valid())
     if request.method == 'GET':
-        form = SizeForm(good.pk)
-        print('ghjkl')
+        form = SizeForm(request.GET, model_name=good.pk)
+        print('GET condition')
 
         if form.is_valid():
             print('valid')
             con = []
-            size = ''
+            size = str()
             for field in form.cleaned_data:
                 if form.cleaned_data[field]:
                     size = field
@@ -288,6 +279,14 @@ def item_view(request, brand, item_id):
         #     print(favorite_form.cleaned_data)
         #     if con:
         #         add_to_favorites(request, good.id)
+
+    context = {
+        'good': good,
+        'form': form,
+        'imgages': Images.objects.filter(good_id=good.id),
+        'favorite': favorite_form,
+        'cart_count': count,
+    }
 
     return render(request, 'MainApp/item.html', context)
 
