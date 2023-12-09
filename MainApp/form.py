@@ -11,19 +11,23 @@ class SortingForm(forms.Form):
 
 
 class SizeForm(forms.Form):
-    def __init__(self, model_name=None, ids=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        self.model_name = kwargs.pop("model_name")  # Вот это позволяет адекватно передавать аргументы в форму,
+        # оказывается не нужно в явном виде указывать аргументы в конструктор
         super(SizeForm, self).__init__(*args, **kwargs)
-        if not model_name and not ids:
+        if not self.model_name:
             sorting_sizes = Sizes.objects.all()
             for field in sorting_sizes:
                 self.fields[str(field.size)] = forms.BooleanField(required=False)
-        elif ids:
-            sorting_sizes = SizesToGoodTable.objects.filter(good_id__in=ids)
-            for field in sorting_sizes:
-                size_from = str(field.size)
-                self.fields[size_from] = forms.BooleanField(required=False)
+
+        # ЭТО Я ЗАКОММЕНТИРОВАЛ НАХУЙ
+        # elif ids:
+        #     sorting_sizes = SizesToGoodTable.objects.filter(good_id__in=ids)
+        #     for field in sorting_sizes:
+        #         size_from = str(field.size)
+        #         self.fields[size_from] = forms.BooleanField(required=False)
         else:
-            sorting_sizes = SizesToGoodTable.objects.filter(good_id=model_name)
+            sorting_sizes = SizesToGoodTable.objects.filter(good_id=self.model_name)
             for field in sorting_sizes:
                 size_from = str(field.size)
                 self.fields[size_from] = forms.BooleanField(required=False)
