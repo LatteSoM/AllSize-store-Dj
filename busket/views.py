@@ -151,7 +151,7 @@ def add_to_cart(request, goods_id, selected_size):
     if 'cart' not in request.session:
         request.session['cart'] = {}
     cart = request.session['cart']
-    uniq_id = str(goods_id)+'_'+str(selected_size)
+    uniq_id = str(goods_id) + '_' + str(selected_size)
     print(type(uniq_id))
     if uniq_id in cart:
         print('s')
