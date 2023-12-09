@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from MainApp.models import Goods, SizesToGoodTable, MainProducts
+from MainApp.models import Goods, SizesToGoodTable, MainProducts, Sizes
 from MainApp.form import DeleteForm, SizeForm
 from busket.form import ContactForm
 from busket.AllSizeBot import saaaaaad
@@ -19,15 +19,23 @@ def remove_from_cart(request, good_id, size):
 
 
 def get_cart_goods(request):
+    # request.session.clear()
     cart = request.session.get('cart', {})
+    print(cart)
     goods_ids = [int(key.split('_')[0]) for key in cart.keys()]  # Получаем список id товаров из ключей словаря cart
     goods = Goods.objects.filter(id__in=goods_ids)  # Получаем товары из базы данных по списку id
     goods_in_cart = []
-    for key in cart:
-        good = goods.get(id=key[:1])
+    for key in cart.keys():
+        # good = goods.get(id=key[:0])
+        good = goods.get(id=int(key.split('_')[0]))
+        # print(key[0])
+        # print(len(goods))
+        # print(goods_ids)
+        # print(cart[key])
+
         good.quantity = cart[key][0]
-        # print(cart[key][1])
-        good.size.get(size=cart[key][1])
+        good.siz = Sizes.objects.get(size=cart[key][1])
+
         goods_in_cart.append(good)
 
     return goods_in_cart

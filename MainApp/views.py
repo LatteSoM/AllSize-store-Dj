@@ -254,9 +254,13 @@ def item_view(request, brand, item_id):
         'cart_count': count,
     }
     print(form.fields)
+    print(form.is_valid())
     if request.method == 'GET':
         form = SizeForm(good.pk)
+        print('ghjkl')
+
         if form.is_valid():
+            print('valid')
             con = []
             size = ''
             for field in form.cleaned_data:
@@ -266,7 +270,7 @@ def item_view(request, brand, item_id):
 
             if con:
                 for sz in con:
-                    add_to_cart(request, good.id, sz)
+                    add_to_cart(request, good.pk, sz)
                 # return render(request, 'busket/bag.html')
                 return redirect('/card/')
 
