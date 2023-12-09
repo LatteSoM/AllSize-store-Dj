@@ -42,10 +42,10 @@ class SizesAdmin(admin.ModelAdmin):
 
 @admin.register(Goods)
 class GoodsAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'model_name', 'main_pic', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed')
+    list_display = ('pk', 'model_name', 'main_pic', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed', 'articul')
     # list_display_links = ('model_name', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed')
-    list_editable = ('model_name', 'main_pic','category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed')
-    search_fields = ('model_name', 'main_pic', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed')
+    list_editable = ('model_name', 'main_pic','category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed', 'articul')
+    search_fields = ('model_name', 'main_pic', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed', 'articul')
     # list_filter = ('pk', 'model_name', 'category', 'brand_id', 'description', 'price', 'color_id', 'sale_confirmed')
 
 

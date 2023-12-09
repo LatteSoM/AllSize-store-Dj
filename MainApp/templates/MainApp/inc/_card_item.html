@@ -1,11 +1,50 @@
-<a href="/nike/gds/{{ good.id | default:'1' }}" class="cards col-2">
-    <div class="imgcont">
-        <img src="{{ good.main_pic.url }}" alt="">
-{#        <img src="/media/image/2023-07-10-11-53-58.jpg" alt="">#}
-    </div>
-    <div class="cardtext">
+{#<a href="/nike/gds/{{ good.id | default:'1' }}" class="cards col-2" style="min-height: 256px; padding: 0">#}
+{#    <div class="imgcont" style="padding: 0">#}
+{#        <img class="rounded img-fluid" src="{{ good.main_pic.url }}" alt="">#}
+{#        <img class="rounded img-fluid" src="{{ good.main_pic.url }}" alt="...">#}
+{#    </div>#}
+{#    <div class="cardtext">#}
+{#        <h3 class="cardbrand">{{ good.brand_id }}</h3>#}
+{#        <h5 class="carddescr">{{ good.model_name }}</h5>#}
+{#        <h4 class="cardprice">{{ good.price }}</h4>#}
+{#    </div>#}
+{#</a>#}
+
+{#<a href="/nike/gds/{{ good.id | default:'1' }}" class="cards col-2" style="min-height: 256px">#}
+{#    <div class="imgcont">#}
+{#        <img class="rounded img-fluid" src="{{ good.main_pic.url }}" alt="">#}
+{#        <img src="{{ good.main_pic.url }}" class="rounded img-fluid" style="width: 210px; height: 210px; object-fit: scale-down" alt="...">#}
+{#    </div>#}
+{#    <div class="cardtext">#}
+{#        <h3 class="cardbrand">{{ good.brand_id }}</h3>#}
+{#        <h5 class="carddescr">{{ good.model_name }}</h5>#}
+{##}
+{#        <h4 class="cardprice">{{ good.price }}</h4><i class="favorite-icon {{ good.is_favorite|yesno:'favorited,' }}" data-product-id="{{ good.id }}" style="font-size: 26px">❤</i>#}
+{#    </div>#}
+{#</a>#}
+
+<div href="/nike/gds/{{ good.id | default:'1' }}" style="min-height: 256px" class="cards col-6 col-lg-3" >
+        <i class="favorite-icon {{ good.is_favorite|yesno:'favorited,' }} d-flex justify-content-end" data-product-id="{{ good.id }}" style="font-size: 26px">❤</i>
+    <a href="/nike/gds/{{ good.id | default:'1' }}" class="imgcont">
+        <img class="rounded img-fluid" src="{{ good.main_pic.url }}" alt="">
+{#        <img src="{{ good.main_pic.url }}" class="rounded img-fluid" style="width: 210px; height: 210px; object-fit: scale-down" alt="...">#}
+    </a>
+    <a href="/nike/gds/{{ good.id | default:'1' }}" class="cardtext">
         <h3 class="cardbrand">{{ good.brand_id }}</h3>
         <h5 class="carddescr">{{ good.model_name }}</h5>
-        <h4 class="cardprice">{{ good.price }}</h4>
-    </div>
-</a>
+
+        <h4 class="cardprice">{{ good.price }} руб</h4>
+    </a>
+</div>
+
+
+{#<div class="cards" style="min-width: 9rem;padding: 0 0;height: 340px; ">#}
+{#  <img src="{{ good.main_pic.url }}" class="card-img-top img-fluid rounded" style="width: 210px; height: 210px; object-fit: scale-down; align-self: top" alt="...">#}
+{#  <div class="card-body" style="min-width: 9em; max-width: 10rem">#}
+{#            <h3 class="cardbrand">{{ good.brand_id }}</h3>#}
+{#        <h5 class="carddescr">{{ good.model_name }}</h5>#}
+{#        <h4 class="cardprice">{{ good.price }}</h4>#}
+{#  </div>#}
+{#</div>#}
+
+

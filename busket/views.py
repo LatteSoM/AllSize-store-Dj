@@ -26,7 +26,8 @@ def get_cart_goods(request):
     for key in cart:
         good = goods.get(id=key[:1])
         good.quantity = cart[key][0]
-        good.size = cart[key][1]
+        # print(cart[key][1])
+        good.size.get(size=cart[key][1])
         goods_in_cart.append(good)
 
     return goods_in_cart
@@ -52,30 +53,36 @@ def group_message(request, client, number):
 
 def order_view(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Обработка данных формы
-            name = form.cleaned_data['name']
-            phone_number = form.cleaned_data['phone_number']
-            # send_order()
-            # telegram_send.send(messages=['успех'])
-            # tok = '6334529129:AAH5JseCYY8l4eEIPUilwTA3BjPDtmo6zAc'
-            # u_id = '420309682'
-            # url = f'https://api.telegram.org/bot{tok}/sendMessage?chat_id={u_id}&parse_mode=MarkDown&text=xuy'
-            # request.get(url)
-            saaaaaad(group_message(request, name, phone_number))
-            return redirect('/card/')
+        if get_cart_goods(request) is not None:
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                # Обработка данных формы
+                name = form.cleaned_data['name']
+                phone_number = form.cleaned_data['phone_number']
+                # send_order()
+                # telegram_send.send(messages=['успех'])
+                # tok = '6334529129:AAH5JseCYY8l4eEIPUilwTA3BjPDtmo6zAc'
+                # u_id = '420309682'
+                # url = f'https://api.telegram.org/bot{tok}/sendMessage?chat_id={u_id}&parse_mode=MarkDown&text=xuy'
+                # request.get(url)
+                saaaaaad(group_message(request, name, phone_number))
+                cart_gds = get_cart_goods(request)
+                for item in cart_gds:
+                    remove_from_cart(request, item.id, item.size)
+                return redirect('/card/')
     else:
         form = ContactForm()
 
     goods = get_cart_goods(request)
+    count = len(goods)
     total = 0
     for good in goods:
         total += good.price
 
     context = {'goods': goods,
                'form': form,
-               'total': total}
+               'total': total,
+               'cart_count': count}
     return render(request, 'busket/order.html', context)
 
 
@@ -91,7 +98,15 @@ def home(request):
     goods = get_cart_goods(request)
 
     form_delete = DeleteForm(request.GET)
-    form = SizeForm(request.GET)
+    list_ids = []
+    for item in goods:
+        list_ids.append(item.pk)
+
+    list_form = []
+    for item in list_ids:
+        list_form.append(SizeForm(model_name=item))
+
+    # form = SizeForm(ids=list_ids)
 
     favourite = request.session.get('favorites', {})
     fav_ids = list(favourite.keys())
@@ -109,14 +124,17 @@ def home(request):
 
     main_cards = Goods.objects.filter(id__in=main_goods_ids())
 
+    goods = get_cart_goods(request)
+    count = len(goods)
+
     context = {
         'goods': goods,
         'form': form_delete,
         'total': total,
         'fav': fav_goods,
-        'add_form': form,
+        'add_form': list_form,
         'mian_cards': main_cards,
-
+        'cart_count': count,
     }
     return render(request, 'busket/bag.html', context)
 

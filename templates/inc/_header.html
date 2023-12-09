@@ -13,7 +13,7 @@
                     <div class="offcanvas-header">
                         <!-- <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
                          -->
-                         <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-center" >
+                         <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-start" >
                             <h1 class="txtlogo">
                                 ALL SIZE
                             </h1>
@@ -22,15 +22,20 @@
                     </div>
                     <div class="offcanvas-body">
                         <div class="burger__menu">
-                            <ul>
-                                <li><a href="{% url 'brands' %}" class="nawhrefs"><h5>Бренды</h5></a></li>
-                                <li> <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs"><h5>Скидки</h5></a></li>
-                                <li><a href="{% url 'all_gds_page' %}" class="nawhrefs"><h5>Новинки</h5></a></li>
-                                <li><a href="{% url 'wishlist_page' %}" class="nawhrefs"><h5>Избранное</h5></a></li>
-                                <li><a href="{% url 'busket_page' %}" class="nawhrefs"><h5>Корзина</h5></a></li>
-{#                                <li><h3>О нас</h3></li>#}
-{#                                <li><h3>Отзывы</h3></li>#}
+                            <ul class="d-flex align-content-start flex-column">
+                                <li><a href="{% url 'brands' %}" class="nawhrefs" style="text-align: left"><h5>Бренды</h5></a></li>
+                                <li><a href="{% url 'sale_page' 'sale' %}" class="nawhrefs" style="text-align: left"><h5>Скидки</h5></a></li>
+                                <li><a href="{% url 'all_gds_page' %}" class="nawhrefs" style="text-align: left"><h5>Новинки</h5></a></li>
+                                <li><a href="{% url 'wishlist_page' %}" class="nawhrefs" style="text-align: left"><h5>Избранное</h5></a></li>
+                                <li><a href="{% url 'busket_page' %}" class="nawhrefs" style="text-align: left"><h5>Корзина</h5></a></li>
                             </ul>
+                        </div>
+                        <div class="d-flex justify-content-center flex-column" style="margin-top: 2em">
+                            <div class="sr__cont d-flex justify-content-center gap-4">
+                                <input type="text" id="search-input-mobile" placeholder="Поиск товара">
+                                <input type="image" src="{% static 'project/img/search.svg' %}" class="icontip" id="product-button-mobile">
+                            </div>
+                            <div id="search-results-mobile" class="d-flex justify-content-center"></div>
                         </div>
                     </div>
                 </div>
@@ -57,17 +62,41 @@
                         ALL SIZE
                     </h1>
                 </a>
-                <div class="searc__ico col-1 justify-content-center align-items-center">
-                    <a href="#"><img src="{% static 'project/img/search.svg' %}" class="icontip" alt="search"></a>
-                </div>
-                <div class="icons col-3">
-                    <a href="#">
-                        <img src="{% static 'project/img/search.svg' %}" alt="search" class="icon">
-                    </a>
+{#                <div class="searc__ico col-1 justify-content-center align-items-center" onclick="click_open()">#}
+{#                    <a href="#" ><img src="{% static 'project/img/search.svg' %}" class="icontip" alt="search" ></a>#}
+{##}
+{##}
+{#                    <input type="text" id="search-input" class="d-flex col-3" placeholder="Поиск товара">#}
+{#                    <div id="search-results" class="d-flex position-absolute"></div>#}
+{#                </div>#}
+                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                    <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">
+                </button>
+
+                <div class="icons col-3 gap-1">
+{#                    <div>#}
+{#                        <img src="{% static 'project/img/search.svg' %}" alt="search" class="icon">#}
+{#                        <input type="text" id="search-input" placeholder="Поиск товара">#}
+{#                        <div id="search-results" class="d-flex position-absolute"></div>#}
+{#                    </div>#}
+                    <div class="d-flex justify-content-center flex-column">
+                        <div class="sr__cont d-flex justify-content-center gap-1">
+                            <input type="text" id="search-input" placeholder="Поиск товара">
+                            <input type="image" src="{% static 'project/img/search.svg' %}" class="icontip" id="product-button">
+                        </div>
+                        <div id="search-results" class="d-flex position-absolute" style="margin-top: 6rem; background-color: #FFFFFF"></div>
+                    </div>
+
+
                     <a href="{% url 'wishlist_page' %}">
                         <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icon">
                     </a>
                     <a href="{% url 'busket_page' %}">
+{#                        <div style="width: 1em; height: 1em; border-radius: 50%; background-color: #a41515; top: -2em; right: -3em; z-index: 7"></div>#}
+                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 2em; font-size: 1em; color: #FFFFFF">
+                            {{ cart_count }}
+                        </span>
+
                         <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icon">
                     </a>
 {#                    <a href="../html/registration.html">#}
@@ -79,6 +108,20 @@
         </div>
     </div>
  <script type="text/javascript">
+
+        document.getElementById('product-button').addEventListener('click', function() {
+            let productName = document.getElementById('search-input').value;
+            if (productName) {
+                window.location.href = '/search/' + encodeURIComponent(productName);
+            }
+        });
+
+        document.getElementById('product-button-mobile').addEventListener('click', function() {
+            let productName = document.getElementById('search-input-mobile').value;
+            if (productName) {
+                window.location.href = '/search/' + encodeURIComponent(productName);
+            }
+        });
 
         function click_open() {
 

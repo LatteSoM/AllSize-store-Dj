@@ -11,11 +11,30 @@ class SortingForm(forms.Form):
 
 
 class SizeForm(forms.Form):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, model_name=None, ids=None, *args, **kwargs):
         super(SizeForm, self).__init__(*args, **kwargs)
+        if not model_name and not ids:
+            sorting_sizes = Sizes.objects.all()
+            for field in sorting_sizes:
+                self.fields[str(field.size)] = forms.BooleanField(required=False)
+        elif ids:
+            sorting_sizes = SizesToGoodTable.objects.filter(good_id__in=ids)
+            for field in sorting_sizes:
+                size_from = str(field.size)
+                self.fields[size_from] = forms.BooleanField(required=False)
+        else:
+            sorting_sizes = SizesToGoodTable.objects.filter(good_id=model_name)
+            for field in sorting_sizes:
+                size_from = str(field.size)
+                self.fields[size_from] = forms.BooleanField(required=False)
+
+
+class AnSizeForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(AnSizeForm, self).__init__(*args, **kwargs)
         sorting_sizes = Sizes.objects.all()
         for field in sorting_sizes:
-            self.fields[field.size] = forms.BooleanField(required=False)
+            self.fields[str(field.size)] = forms.BooleanField(required=False)
 
 
 class SaleForm(forms.Form):

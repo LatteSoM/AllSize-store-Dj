@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from MainApp.models import *
 from MainApp.form import DeleteForm, SizeForm
-from busket.views import add_to_cart
+from busket.views import add_to_cart, get_cart_goods
 # from MainApp.views import main_goods_ids
 # Create your views here.
 
@@ -19,8 +19,12 @@ def home(request):
     goods_ids = list(fav_list.keys())
     goods = Goods.objects.filter(id__in=goods_ids)
 
+    # favourite = request.session.get('favorites', {})
+    # fav_ids = list(favourite.keys())
+    # fav_goods = Goods.objects.filter(id__in=fav_ids)
+
     form_delete = DeleteForm(request.GET)
-    form = SizeForm(request.GET)
+    form = SizeForm()
 
     total = 0
     for good in goods:
@@ -34,12 +38,16 @@ def home(request):
 
     main_cards = Goods.objects.filter(id__in=main_goods_ids())
 
+    gds = get_cart_goods(request)
+    count = len(gds)
+
     context = {
         'goods': goods,
         'form': form_delete,
         'total': total,
         'add_form': form,
         'mian_cards': main_cards,
+        'cart_count': count,
     }
 
     return render(request, 'wishlist/wishlist.html', context)
@@ -69,6 +77,7 @@ def add_to_favorites(request, goods_id):
         # print('неправильное услоыие')
     request.session['favorites'] = fav
     request.session.modified = True
+
     # if request.method == 'POST':
     #     if not request.session.get('favorites'):
     #         request.session['favorites'] = list()

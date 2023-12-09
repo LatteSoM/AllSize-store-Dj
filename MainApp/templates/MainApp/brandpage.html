@@ -15,10 +15,6 @@
                         <div class="btntextwish">Сортировать по:</div>
                     </button>
                     <ul class="dropdown-menu">
-{#                      <li><a class="dropdown-item" href="#">дороже</a></li>#}
-{#                      <li><a class="dropdown-item" href="#">новое</a></li>#}
-{#                      <li><a class="dropdown-item" href="#">дешевле</a></li>#}
-
                         <li><form method="POST" action="{% url 'button' %}">
                             {% csrf_token %}
                             <input class="sortbtn btntextwish" type="submit" name="expensive" value="дороже"/>
@@ -44,6 +40,8 @@
             {% include 'MainApp/inc/_card_item.html' with good=good  %}
         {% endfor %}
     </div>
+            <h2>Если вы не нашли то, что искали - попробуйте воспользоваться поиском, или применить фильтр со страницы "Новинок"</h2>
+
 {% endblock %}
 {##}
 {#{% extends 'base.html' %}#}

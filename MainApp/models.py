@@ -39,9 +39,12 @@ class Goods(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand_id = models.ForeignKey(Brands, on_delete=models.CASCADE)
     description = models.CharField()
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=6, decimal_places=0)
     color_id = models.ForeignKey(Colors, on_delete=models.CASCADE)
+    articul = models.CharField(max_length=50, blank=True )
     sale_confirmed = models.BooleanField()
+
+    size = models.ManyToManyField(Sizes, through='SizesToGoodTable')
 
     def __str__(self):
         return self.model_name

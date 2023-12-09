@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load extratages %}
 {% block content %}
     <h1 class="">Корзина</h1>
     <div class="row d-flex align-items-top sep">
@@ -36,7 +37,7 @@
 
     <div class="row d-flex align-items-top gap-3 sep cartcont justify-content-start .scroll" style=" ">
 
-        {% for good in fav  %}
+        {% for good in fav %}
             {% include 'wishlist/inc/_wish_card.html' with good=good%}
         {% endfor %}
 

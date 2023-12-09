@@ -1,11 +1,14 @@
 {% load static %}
 <div class="wishcard col-4">
-    <div class="wishlistimg">
-        <img src="{{ good.main_pic.url }}" alt="">
-    </div>
+    <a href="/{{ good.brand_id }}/gds/{{ good.id | default:'1' }}" class="wishlistimg">
+        <div >
+            <img src="{{ good.main_pic.url }}" alt="">
+        </div>
+    </a>
+
     <div class="wishcardinf">
         <div class="wishtrashcont">
-            <h3 class="cardbrand">{{ good.brand.id }}</h3>
+            <h3 class="cardbrand">{{ good.brand_id }}</h3>
             <form method="POST" action="{% url 'delete_fav' good.id  %}">
                 {% csrf_token %}
 {#                {{ form.as_p }}#}
@@ -19,12 +22,12 @@
 {#            </div>#}
         </div>
         <h4 class="carddescr">{{ good.model_name }}</h4>
-        <h4 class="cardprice">{{ good.price }}$</h4>
-        <form method="GET" action="">
+        <h4 class="cardprice">{{ good.price }} руб</h4>
+        <form method="GET" action="" class="d-flex">
             <input type="hidden" name="goods_id" value="{{ good.id }}">
             <select name="size" class="wishcardbtn">
-                {% for size in add_form  %}
-                    <option value="{{ size.label }}">{{ size.label }}</option>
+                {% for size in good.size.all  %}
+                    <option value="{{ size.size }}">{{ size.size }}</option>
                 {% endfor %}
             </select>
             <input type="submit" class="wishcardbtn" value="В корзину" />

@@ -1,9 +1,13 @@
 {% load static %}
 <div class="bagcard col-12">
-        <div class="bagimgcont col-3">
-            <img src="{{ good.main_pic.url }}" alt="">
-        </div>
-
+        <a href="/{{ good.brand_id }}/gds/{{ good.id | default:'1' }}" class="bagimgcont col-3">
+            <div >
+                <img src="{{ good.main_pic.url }}" alt="">
+            </div>
+        </a>
+{#        <div class="bagimgcont col-3">#}
+{#            <img src="{{ good.main_pic.url }}" alt="">#}
+{#        </div>#}
         <div class="textbagcont col-7 col-lg-8 gap-0">
             <div class="bordcont">
                 <div class="bagpricecont">
@@ -14,7 +18,7 @@
             <h5 class="bagcarddescr">{{ good.model_name }}</h5>
             <h5 class="bagcarddescr">{{ good.color_id }}</h5>
             <div class="btnsss d-flex gap-5">
-                <div class="btntext">Размер: {{ good.size }}</div>
+                <div class="btntext">Размер: {{ good.size. }}</div>
 
 {#                <div class="dropdown-center">#}
 {#                    <button class="bagbtn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
@@ -42,11 +46,11 @@
             </div>
         </div>
         <div class="bagicons">
-            <form method="POST" action="{% url 'delete_good' good.id good.size  %}">
-                {% csrf_token %}
+{#            <form method="POST" action="{% url 'delete_good' good.id good.size.get(pk=)  %}">#}
+{#                {% csrf_token %}#}
 {#                {{ form.as_p }}#}
-                <input type="image" src="{% static 'project/img/trash.svg' %}">
-            </form>
+{#                <input type="image" src="{% static 'project/img/trash.svg' %}">#}
+{#            </form>#}
 {#            <a href="#"><img src="{% static 'project/img/trash.svg' %}" alt="remove" class="iconBtn"></a>#}
         </div>
     </div>
