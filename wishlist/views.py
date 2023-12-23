@@ -24,7 +24,7 @@ def home(request):
     # fav_goods = Goods.objects.filter(id__in=fav_ids)
 
     form_delete = DeleteForm(request.GET)
-    form = SizeForm()
+    form = SizeForm(model_name=None)
 
     total = 0
     for good in goods:

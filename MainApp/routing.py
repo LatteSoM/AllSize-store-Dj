@@ -18,6 +18,7 @@ urlpatterns = [
     path('<str:brand>/gds/<int:item_id>/', v.item_view),
     path('add_to_fav/<int:product_id>/', v.add_fav, name='add_to_favorites'),
     path('search/', v.search),
-    path('search/<str:search_term>', v.goods )
+    path('search/<str:search_term>', v.goods ),
+    path('info/', v.info_page, name='info')
     # path('add/<int:good_id>/', v.add_to_fav, name='add_fav'),
 ] + djstat(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

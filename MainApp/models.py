@@ -6,6 +6,7 @@ from django.db import models
 
 class Brands(models.Model):
     brand_name = models.CharField(max_length=50)
+    brands_pic = models.ImageField(null=True, upload_to='image')
 
     def __str__(self):
         return self.brand_name
@@ -14,6 +15,7 @@ class Brands(models.Model):
 class Category(models.Model):
     brand = models.ForeignKey(Brands, on_delete=models.CASCADE)
     category_name = models.CharField(max_length=50)
+    cat_pic = models.ImageField(null=True, upload_to='image')
 
     def __str__(self):
         return self.category_name
@@ -53,6 +55,14 @@ class Goods(models.Model):
 class HugeCard(models.Model):
     good_id = models.ForeignKey(Goods, on_delete=models.CASCADE)
     description = models.CharField(max_length=60)
+
+
+class MainCats(models.Model):
+    cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+
+class MainBrands(models.Model):
+    brand_id = models.ForeignKey(Brands, on_delete=models.CASCADE)
 
 
 class MainProducts(models.Model):

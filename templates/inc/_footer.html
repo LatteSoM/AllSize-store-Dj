@@ -54,9 +54,9 @@
     <div class="col mb-3">
       <h5>Информация</h5>
       <ul class="nav flex-column" style="color: #FFFFFF">
-        <li class="nav-item mb-2" style="color: #FFFFFF"><a href="#" class="nav-link p-0" style="color: #FFFFFF">ГАРАНТИИ И ВОЗВРАТ</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" style="color: #FFFFFF">ОПЛАТА И ДОСТАВКА</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0" style="color: #FFFFFF">О КОМПАНИИ</a></li>
+        <li class="nav-item mb-2" style="color: #FFFFFF"><a href="{% url 'info' %}#back" class="nav-link p-0" style="color: #FFFFFF">ГАРАНТИИ И ВОЗВРАТ</a></li>
+        <li class="nav-item mb-2"><a href="{% url 'info' %}#pay" class="nav-link p-0" style="color: #FFFFFF">ОПЛАТА И ДОСТАВКА</a></li>
+        <li class="nav-item mb-2"><a href="{% url 'info' %}#company" class="nav-link p-0" style="color: #FFFFFF">О КОМПАНИИ</a></li>
       </ul>
     </div>
 
@@ -114,11 +114,11 @@
         searchResultsDiv.empty();  // Очистить результаты поиска
 
         if (results.length === 0) {
-            searchResultsDiv.append('<p>Ничего не найдено</p>');
+            {#searchResultsDiv.append('<p>Ничего не найдено</p>');#}
         } else {
             let ul = $('<ul></ul>');
             results.forEach(function(result) {
-                let a = $(`<a href="/${result.brand_mame}/gds/${result.id}" style="color: black"></a>`).text(result.model_name)
+                let a = $(`<a href="/${result.brand_mame}/gds/${result.id}" style="color: black" class="search_item_hower"></a>`).text(result.model_name)
                 {#let li = $('<li style="color: black"></li>').text(result.model_name);  // Обращение к свойству 'model_name'#}
                 let li = $('<li style="color: black"></li>').append(a)
                 ul.append(li);

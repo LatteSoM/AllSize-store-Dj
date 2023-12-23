@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row justify-content-center align-items-center sep fict">
          {% for cat in category %}
-            {% include 'MainApp/inc/_cat_card.html' with cat_name=cat.category_name brand=category.brand %}
+            {% include 'MainApp/inc/_cat_card.html' with cat_name=cat.category_name cat_pic=cat.cat_pic.url %}
          {% endfor %}
     </div>
 {% endblock %}

@@ -51,7 +51,7 @@ def group_message(request, client, number):
     goods_in_cart = get_cart_goods(request)
     for good in goods_in_cart:
         a += f'Модель: {good.model_name} \n' \
-            f'Размер: {good.size} \n' \
+            f'Размер: {good.siz} \n' \
             f'Количество: {good.quantity} \n' \
             f'------------------------------- \n'
     #     message[0] += a
@@ -60,6 +60,7 @@ def group_message(request, client, number):
 
 
 def order_view(request):
+    print(get_cart_goods(request))
     if request.method == 'POST':
         if get_cart_goods(request) is not None:
             form = ContactForm(request.POST)
@@ -76,7 +77,7 @@ def order_view(request):
                 saaaaaad(group_message(request, name, phone_number))
                 cart_gds = get_cart_goods(request)
                 for item in cart_gds:
-                    remove_from_cart(request, item.id, item.size)
+                    remove_from_cart(request, item.id, item.siz)
                 return redirect('/card/')
     else:
         form = ContactForm()

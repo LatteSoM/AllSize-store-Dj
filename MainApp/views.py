@@ -20,6 +20,10 @@ def add_fav(request, product_id):
     return JsonResponse({'status': 'success'})
 
 
+def info_page(request):
+    return render(request, 'MainApp/info.html')
+
+
 def search(request):
     search_term = request.GET.get('q')
     results = Goods.objects.filter(model_name__icontains=search_term)
@@ -37,6 +41,22 @@ def main_goods_ids():
     return main_cards_ids
 
 
+def main_cats_ids():
+    lis = []
+    ids = MainCats.objects.all()
+    for idd in ids:
+        lis.append(idd.cat_id.pk)
+    return lis
+
+
+def main_br_ids():
+    lis = []
+    ids = MainBrands.objects.all()
+    for idd in ids:
+        lis.append(idd.brand_id.pk)
+    return lis
+
+
 def home(request):
     # category_fill()
     huge_card_id = HugeCard.objects.first().id
@@ -47,6 +67,9 @@ def home(request):
 
     good_on_sale = Goods.objects.filter(sale_confirmed=True)
 
+    main_cats = Category.objects.filter(id__in=main_cats_ids())
+    main_br = Brands.objects.filter(id__in=main_br_ids())
+
     goods = get_cart_goods(request)
     count = len(goods)
 
@@ -55,8 +78,8 @@ def home(request):
         'descr': huge_card_descr,
         'mian_cards': main_cards,
         'sale': good_on_sale,
-        'category': [1, 2, 3, 4],
-        'brands': [1, 2, 3, 4, 5],
+        'category': main_cats,
+        'brands': main_br,
         'cart_count': count,
     }
     return render(request, 'MainApp/main.html', context)
@@ -73,7 +96,8 @@ def brands_only(request):
     count = len(goods)
 
     context = {
-        'brands': br_list,
+        # 'brands': br_list,
+        'brands': brand_cards,
         'cart_count': count,
         # 'need_to_show_brand': 'True',
         # 'category': category_cards,
@@ -238,7 +262,7 @@ def create_images(good_id, folder_path):
 
 def item_view(request, brand, item_id):
     good = Goods.objects.get(id=item_id)
-    # create_sizes_to_good(good.pk, ('40', '47'))
+    # create_sizes_to_good(good.pk, ('36', '41'))
     # create_images(good.pk, 'C:/Users/LinQuid/Downloads/1 джорданые низкие/1 джорданые низкие/Air Jordan 1 Low White Camo (36-46) 10.490₽/')
     print(good.pk, "<--- Good PK")
     form = SizeForm(request.GET, model_name=good.pk)

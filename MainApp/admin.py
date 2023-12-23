@@ -4,21 +4,20 @@ from MainApp.models import *
 
 @admin.register(Brands)
 class BrandsAdmin(admin.ModelAdmin):
-    list_display = ('brand_name',)
+    list_display = ('pk', 'brand_name', 'brands_pic')
     # list_display_links = ('brand_name',)
-    # list_editable = ('brand_name',)
-    search_fields = ('brand_name',)
+    list_editable = ('brand_name', 'brands_pic')
+    search_fields = ('brand_name', 'brands_pic')
     # list_filter = ('pk', 'brand_name')
-
 
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'category_name', 'brand')
+    list_display = ('pk', 'category_name', 'brand', 'cat_pic')
     # list_display_links = ('category_name',)
-    list_editable = ('category_name', 'brand')
-    search_fields = ('category_name', 'brand')
+    list_editable = ('category_name', 'brand', 'cat_pic')
+    search_fields = ('category_name', 'brand', 'cat_pic')
     # list_filter = ('pk', 'category_name')
 
 
@@ -98,6 +97,20 @@ class MainProductAdmin(admin.ModelAdmin):
     list_display = ('pk', 'good_id',)
     list_editable = ('good_id', )
     search_fields = ('good_id', )
+
+
+@admin.register(MainBrands)
+class MainBrandsAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'brand_id',)
+    list_editable = ('brand_id', )
+    search_fields = ('brand_id', )
+
+
+@admin.register(MainCats)
+class MainCatsAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'cat_id',)
+    list_editable = ('cat_id', )
+    search_fields = ('cat_id', )
 
 # Register your models here.
 

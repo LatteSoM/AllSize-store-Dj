@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row justify-content-center align-items-center sep fict">
         {% for brand in brands %}
-            {% include 'MainApp/inc/_category_card.html' with brand=brand %}
+            {% include 'MainApp/inc/_category_card.html' with brand=brand.brand_name pic=brand.brands_pic.url %}
         {% endfor %}
     </div>
 {% endblock %}

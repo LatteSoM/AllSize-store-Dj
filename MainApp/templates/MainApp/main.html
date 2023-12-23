@@ -31,7 +31,7 @@
     <div class="row d-flex justify-content-center align-items-center sep gap-3">
         <h1 class="d-flex col-12 justify-content-center">Наши Бренды</h1>
         {% for brand in brands %}
-            {% include 'MainApp/inc/_mainbrand_card.html' %}
+            {% include 'MainApp/inc/_mainbrand_card.html' with pic=brand.brands_pic.url brand=brand.brand_name %}
         {% endfor %}
 
 
@@ -42,12 +42,12 @@
 
     </div>
     <div class="row d-flex justify-content-center align-items-center sep gap-3">
-        <h1 class="d-flex col-12 justify-content-center">Популярные категроии</h1>
+        <h1 class="d-flex col-12 justify-content-center">Популярные категории</h1>
     </div>
 
     <div class="row justify-content-center gap-4 align-items-center sep">
-        {% for i in category %}
-            {% include 'MainApp/inc/_cat_card.html' with cat_name='Название' %}
+        {% for cat in category %}
+            {% include 'MainApp/inc/_cat_card.html' with cat_name=cat.category_name cat_pic=cat.cat_pic.url %}
         {% endfor %}
 
     </div>

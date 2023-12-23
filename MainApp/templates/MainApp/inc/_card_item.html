@@ -29,11 +29,14 @@
         <img class="rounded img-fluid" src="{{ good.main_pic.url }}" alt="">
 {#        <img src="{{ good.main_pic.url }}" class="rounded img-fluid" style="width: 210px; height: 210px; object-fit: scale-down" alt="...">#}
     </a>
-    <a href="/nike/gds/{{ good.id | default:'1' }}" class="cardtext">
-        <h3 class="cardbrand">{{ good.brand_id }}</h3>
-        <h5 class="carddescr">{{ good.model_name }}</h5>
+    <a href="/nike/gds/{{ good.id | default:'1' }}" class="cardtext justify-content-between" style="height: 100%">
+        <div class="d-flex justify-content-between flex-column">
+            <h3 class="cardbrand">{{ good.brand_id }}</h3><br>
+            <h5 class="carddescr">{{ good.model_name }}</h5>
+        </div>
 
         <h4 class="cardprice">{{ good.price }} руб</h4>
+
     </a>
 </div>
 

