@@ -39,13 +39,12 @@ class Goods(models.Model):
     model_name = models.CharField(max_length=250)
     main_pic = models.ImageField(null=True, upload_to='image')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    brand_id = models.ForeignKey(Brands, on_delete=models.CASCADE)
-    description = models.CharField()
+    brand_id = models.ForeignKey(Brands, max_length=250, on_delete=models.CASCADE)
+    description = models.CharField(max_length=250)
     price = models.DecimalField(max_digits=6, decimal_places=0)
     color_id = models.ForeignKey(Colors, on_delete=models.CASCADE)
-    articul = models.CharField(max_length=50, blank=True )
+    articul = models.CharField(max_length=50, blank=True)
     sale_confirmed = models.BooleanField()
-
     size = models.ManyToManyField(Sizes, through='SizesToGoodTable')
 
     def __str__(self):
@@ -80,12 +79,3 @@ class Images(models.Model):
     good_id = models.ForeignKey(Goods, on_delete=models.CASCADE)
 
 
-class Buyer(models.Model):
-    buyer_name = models.CharField()
-    buyer_mobile = models.CharField()
-
-
-class Orders(models.Model):
-    item_name = models.ForeignKey(Goods, on_delete=models.CASCADE)
-    select_size = models.CharField(max_length=50)
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)

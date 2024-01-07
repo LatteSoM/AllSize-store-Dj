@@ -66,24 +66,6 @@ class ImagesAdmin(admin.ModelAdmin):
     # list_filter = ('pk', 'imga', 'good_id')
 
 
-@admin.register(Buyer)
-class BuyerAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'buyer_name', 'buyer_mobile')
-    # list_display_links = ('buyer_name', 'buyer_mobile')
-    list_editable = ('buyer_name', 'buyer_mobile')
-    search_fields = ('buyer_name', 'buyer_mobile')
-    # list_filter = ('pk', 'buyer_name', 'buyer_mobile')
-
-
-@admin.register(Orders)
-class OrdersAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'item_name', 'select_size', 'buyer')
-    # list_display_links = ('item_name', 'select_size', 'buyer')
-    list_editable = ('item_name', 'select_size', 'buyer')
-    search_fields = ('item_name', 'select_size', 'buyer')
-    # list_filter = ('pk', 'item_name', 'select_size', 'buyer')
-
-
 @admin.register(HugeCard)
 class HugeCardAdmin(admin.ModelAdmin):
     list_display = ('pk', 'good_id', 'description',)

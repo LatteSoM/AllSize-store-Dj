@@ -24,9 +24,12 @@ FAV_SESSION_ID = 'favorites'
 SECRET_KEY = 'django-insecure-g_3xn$as1fw@7jj^6!-8&6-lrf8y%n+_f$33hfd_p736t1vgwa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['allsizs.com', '5.35.91.72']
 
 
 # Application definition
@@ -79,14 +82,22 @@ WSGI_APPLICATION = 'AllSize.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'all_size_db',
+    #     'USER': 'postgres',
+    #     'PASSWORD': '1234',
+    #     'HOST': 'localhost',
+    #     'PORT': '9000'
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'all_size_db',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '9000'
-    }
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'all_size_db',
+            'USER': 'postgres',
+            'PASSWORD': '86421488',
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
 }
 
 
@@ -124,7 +135,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = '/root/AllSize-store-Dj/static/'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

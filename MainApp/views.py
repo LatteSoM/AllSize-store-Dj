@@ -262,9 +262,9 @@ def create_images(good_id, folder_path):
 
 def item_view(request, brand, item_id):
     good = Goods.objects.get(id=item_id)
-    # create_sizes_to_good(good.pk, ('36', '41'))
+    # create_sizes_to_good(good.pk, ('36', '46'))
     # create_images(good.pk, 'C:/Users/LinQuid/Downloads/1 джорданые низкие/1 джорданые низкие/Air Jordan 1 Low White Camo (36-46) 10.490₽/')
-    print(good.pk, "<--- Good PK")
+    # print(good.pk, "<--- Good PK")
     form = SizeForm(request.GET, model_name=good.pk)
     favorite_form = FavoritesForm(request.GET)
 
@@ -272,7 +272,7 @@ def item_view(request, brand, item_id):
     count = len(goods)
     if request.method == 'GET':
         form = SizeForm(request.GET, model_name=good.pk)
-        print('GET condition')
+        # print('GET condition')pip
 
         if form.is_valid():
             print('valid')
