@@ -15,17 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+# from django.contrib.sitemaps.views import sitemap
+# from .sitemaps import AllSizeSitemap
 from django.urls import path, include, re_path
+from django.views.generic import TemplateView
+
 from AllSize import settings
 from django.conf.urls.static import static
 from django.views.static import serve as mediaserve
 
 
+# sitemaps = {'goods': AllSizeSitemap}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('MainApp.routing')),
     path('card/', include('busket.routing')),
-    path('wish/', include('wishlist.routings'), name='wish')
+    path('wish/', include('wishlist.routings'), name='wish'),
+    # re_path(r'^robots\.txt$', TemplateView.as_view(template_name="AllSize/robots.txt", content_type='text/plain')),
+    # re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
 ]
 
 if settings.DEBUG:

@@ -41,16 +41,19 @@
 .scroll{
             overflow-x: scroll;
             overflow-y: hidden;
+            scrollbar-width: thin; /* thin, auto, или none */
+            scrollbar-color: #D0D0D0 #ffffff; /* цвет ползунка и фона */
+            /*scrollbar-arrow-color: black;*/
         }
-.scroll::-webkit-scrollbar{
-            width: 30px;
-        }
-        .scroll::-webkit-scrollbar *{
-            background: transparent;
-        }
-        .scroll::-webkit-scrollbar-thumb{
-            background: rgba(255,0,0,0.1) !important;
-        }
+/*.scroll::-webkit-scrollbar{*/
+/*            width: 30px;*/
+/*        }*/
+/*        .scroll::-webkit-scrollbar *{*/
+/*            background: transparent;*/
+/*        }*/
+/*        .scroll::-webkit-scrollbar-thumb{*/
+/*            background: rgba(255,0,0,0.1) !important;*/
+/*        }*/
 
 .icon{
     height: 30px;
@@ -64,12 +67,16 @@
     font-style: normal;
     font-weight: 900;
     line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .nawhrefs{
-    color: #000;
+    color: black;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -134,8 +141,126 @@
 }
 
 
+.fav-box {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+.fav-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    /*border: 1px solid #ccc;*/
+    border-radius: 100px;
+    transition: all ease 0.2s;
+}
+.fav-btn svg {
+    width: 32px;
+    fill: #ccc;
+    transition: all ease 0.3s;
+}
+.fav-btn:hover {
+    transform: scale(1.1);
+}
+.fav-btn:hover svg {
+    transform: scale(1.12);
+}
+.fav-btn:active {
+    transform: scale(0.9);
+}
+.fav-btn:active svg {
+    transform: scale(0.8);
+}
+.favorited svg {
+    fill: #f83b3b;
+}
+
+.icons_mobile{
+    display: none;
+}
+
+
+
 
 @media (max-width: 767px) {
+
+    .icons_mobile{
+        display: flex;
+    }
+
+    .txtlogo{
+        text-align: start;
+    }
+
+    .burger {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: flex-end;
+      width: 29px;
+      height: 24px;
+      /* z-index: 50; */
+    }
+
+    .burger span{
+      height: 0.15em;
+      width: 100%;
+      background-color: #333;
+       transform: scale(1);
+      border-radius: 12px;
+
+    }
+
+    .burger::before,
+    .burger::after {
+      content: "";
+      width: 100%;
+      height: 0.15em;
+      background-color: #333;
+      position: absolute;
+      border-radius: 12px;
+
+    }
+
+    .burger::after{ bottom: 0; }
+    .burger::before{ top: 0;}
+
+    .arrow {
+      /*margin: 100px;*/
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: flex-end;
+      width: 15px;
+      height: 10px;
+      /* z-index: 50; */
+    }
+
+    .arrow span{
+      height: 0.1em;
+      width: 100%;
+      background-color: #333;
+      /* transform: scale(1); */
+      border-radius: 12px;
+      display: none
+      ;
+
+    }
+
+    .arrow::before,
+    .arrow::after {
+      content: "";
+      width: 90%;
+      height: 0.1em;
+      background-color: #333;
+      position: absolute;
+      border-radius: 12px;
+
+    }
+
+    .arrow::after{ bottom: 0; transform: rotate(-45deg);}
+    .arrow::before{ top: 0;transform: rotate(45deg)}
 
     .wishcard{
         max-width: 100%;
@@ -148,20 +273,26 @@
     }
 
     .navbtnss{
+        border: 1px solid #D0D0D0;
         display: flex;
         /* width: fit-content; */
-        padding: 8px 15px;
+        padding: 2px 5px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        border-radius: 8px;
+        background: #FFFFFF;
+        color: black;
         width: 30%;
     }
 
     .navbtnss.all_br{
         width: 50%;
+        border: none;
+    }
+
+    .navbtnss.have_border{
+        border: 1px solid #D0D0D0;
     }
 
     .allbranditemcont{
@@ -174,6 +305,10 @@
         /* gap: calc(var(--index)*0.2); */
         gap: calc(var(--index)*0.3);
         justify-content: space-between;
+    }
+
+    .icons_mobile{
+        display: flex;
     }
 
     .cards{
@@ -301,8 +436,9 @@
         align-items: center;
         /* gap: 5px; */
         border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        border: 1px solid #D0D0D0;
+        background: #FFFFFF;
+        color: black;
     }
 
     .offcanvas-body{
@@ -425,6 +561,7 @@
 
     .navbtnss.get_ord{
         width: 100%;
+        border: 1px solid #D0D0D0;
     }
 
 
@@ -460,15 +597,16 @@ and (max-width:1200px)
     }
 
     .navbtnss{
+        border: 1px solid #D0D0D0;
         display: flex;
         /* width: fit-content; */
-        padding: 8px 15px;
+        padding: 2px 5px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        background: #FFFFFF;
+        color: black;
         width: 30%;
     }
 
@@ -502,6 +640,7 @@ and (max-width:1200px)
 
     .navbtnss.get_ord{
         width: 100%;
+        border: 1px solid #D0D0D0;
     }
 
     .wishcard{
@@ -520,7 +659,7 @@ and (max-width:1200px)
 
     .imgcont{
         display: flex;
-        width: calc(var(--index)*16);
+        /*width: calc(var(--index)*16);*/
         height: 263px;
         flex-direction: column;
         justify-content: center;
@@ -567,8 +706,9 @@ and (max-width:1200px)
         align-items: center;
         /* gap: 5px; */
         border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        border: 1px solid #D0D0D0;
+        background: #FFFFFF;
+        color: black;
     }
 
     .right_btn_grp{
@@ -666,15 +806,16 @@ and (max-width:1200px)
     }
 
     .navbtnss{
+        border: 1px solid #D0D0D0;
         display: flex;
         /* width: fit-content; */
-        padding: 8px 15px;
+        padding: 2px 5px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        background: #FFFFFF;
+        color: black;
         width: 30%;
     }
 
@@ -708,6 +849,7 @@ and (max-width:1200px)
 
     .navbtnss.get_ord{
         width: 100%;
+        border: 1px solid #D0D0D0;
     }
 
     .vispadva{
@@ -766,7 +908,7 @@ and (max-width:1200px)
     .sortbtn{
         display: flex;
         /* width: calc(var(--index)*6.5); */
-        width: fit-content;
+        width: 100%;
         /* font-size: 5px; */
         padding: 8px 15px;
         height: 2.5rem;
@@ -775,8 +917,9 @@ and (max-width:1200px)
         align-items: center;
         /* gap: 5px; */
         border-radius: 12px;
-        background: #181616;
-        color: #FFF;
+        border: 1px solid #D0D0D0;
+        background: #FFFFFF;
+        color: black;
     }
 
     .right_btn_grp{
@@ -1306,9 +1449,20 @@ and (max-width:1200px)
     align-items: center;
     gap: 7px;
     border-radius: 12px;
-    background: #181616;
-    color: #FFF;
+    /*background: #FFFFFF;*/
+    color: black;
+    border: 1px solid #D0D0D0;
 }
+/* Скрыть стандартный чекбокс */
+.checkbox-label {
+  display: none;
+}
+/* Стили для отмеченного флажка */
+.checkbox-label:checked + .sizebtn {
+  background-color: black;
+  color: #FFFFFF;
+}
+
 
 .addbagbtn{
     display: flex;
@@ -1318,8 +1472,9 @@ and (max-width:1200px)
     align-items: center;
     flex-direction: column;
     border-radius: 12px;
-    background: #181616;
-    color: #FFF;
+    background: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    color: black;
 }
 
 

@@ -24,7 +24,7 @@
 <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top" style="background-color: #1e1e2e; color: #FFFFFF; padding: 2em">
     <div class="col mb-3">
       <a href="{% url 'home_page' %}" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-        <h1 class="txtlogo" style="color: #FFFFFF">
+        <h1 class="txtlogo" style="color: #FFFFFF; font-weight: bold">
             ALL SIZE
         </h1>
       </a>
@@ -42,7 +42,7 @@
 
     </div>
 
-    <div class="col mb-3">
+    <div class="col-md-3">
       <h5>Контактная информация</h5>
       <ul class="nav flex-column">
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0" style="color: #FFFFFF" >АДРЕС: <br> Волгоградский проспект 1 стр.1</a></li>
@@ -50,8 +50,9 @@
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0" style="color: #FFFFFF">EMAIL: <br> email_example@gmail.com</a></li>
       </ul>
     </div>
-
-    <div class="col mb-3">
+    <br>
+    <br>
+    <div class="col-md-3">
       <h5>Информация</h5>
       <ul class="nav flex-column" style="color: #FFFFFF">
         <li class="nav-item mb-2" style="color: #FFFFFF"><a href="{% url 'info' %}#back" class="nav-link p-0" style="color: #FFFFFF">ГАРАНТИИ И ВОЗВРАТ</a></li>
@@ -59,7 +60,7 @@
         <li class="nav-item mb-2"><a href="{% url 'info' %}#company" class="nav-link p-0" style="color: #FFFFFF">О КОМПАНИИ</a></li>
       </ul>
     </div>
-
+    {% csrf_token %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
 
@@ -69,45 +70,72 @@
         console.log(slider)
         if (burger.classList.contains("show")) slider.style.display = "none"
 
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            const favoriteIcons = document.querySelectorAll('.favorite-icon');
+            const favoriteIcons = document.querySelectorAll('.fav-btn');
 
             favoriteIcons.forEach(icon => {
+                const productId = icon.dataset.productId;
+
+                fetch(`/is_fav/${productId}/`, {
+                    method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/json',
+                        }
+                } )
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'in_fav') {icon.classList.add('favorited');}
+                })
+
+
+
+
                 icon.addEventListener('click', function() {
-                    const productId = icon.dataset.productId;
                     fetch(`/add_to_fav/${productId}/`, {
                         method: 'POST',
                         headers: {
                             'X-CSRFToken': getCookie('csrftoken'),
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
                         }
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
                             // Обновляем интерфейс, например, меняем цвет иконки
-                            icon.classList.add('favorited');
-                            icon.style.color = "red"
+                            {#icon.querySelector(':before').style.background = '#cc0000';#}
+                            {#icon.querySelector(':after').style.background = '#cc0000'#}
+                            {#icon.classList.add('favorited');#}
+                            icon.classList.toggle('favorited');
+
+                            {#icon.style.color = "red"#}
+
                         }
+                        {#else {icon.classList.remove('favorited')}#}
+                        else {icon.style.fill = '#FFFFF'}
+
                     });
                 });
             });
         });
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
+
 
     function updateSearchResults(results) {
         let searchResultsDiv = $('#search-results');

@@ -1,0 +1,184 @@
+{% load static %}
+
+<header class="header" style="z-index: 4">
+    <div class="shapka container-fluid">
+        <div class="container">
+
+            <div class="row justify-content-between align-items-center mobil">
+                <button class="btn btn__burger col-1" style="padding: 0; font-size: unset" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+{#                    <img src="{% static 'project/img/BurgeNav.svg' %}" alt="burgerNav">#}
+                    <div class="burger">
+                      <span></span>
+                    </div>
+                </button>
+
+                <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                    <div class="offcanvas-header">
+                        <!-- <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+                         -->
+                         <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-start" >
+                            <h1 class="txtlogo" style="font-weight: bold">
+                                ALL SIZE
+                            </h1>
+                        </a>
+                        <button type="button" class="btn-close" onclick="click_close()" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="burger__menu">
+                            <ul class="d-flex align-content-start flex-column gap-4">
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'brands' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Бренды</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'sale_page' 'sale' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Скидки</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'all_gds_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Новинки</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'wishlist_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Избранное</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'busket_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Корзина</h5></a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-center flex-column" style="margin-top: 2em">
+                            <div class="sr__cont d-flex justify-content-center gap-4">
+                                <input type="text" id="search-input-mobile" placeholder="Поиск товара">
+                                <input type="image" src="{% static 'project/img/search.svg' %}" class="icontip" id="product-button-mobile">
+                            </div>
+                            <div id="search-results-mobile" class="d-flex justify-content-center"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="navpanel col-3">
+                    <a href="{% url 'brands' %}" class="nawhrefs">
+                        <h5>
+                            Бренды
+                        </h5>
+                    </a>
+                    <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs">
+                        <h5>
+                            Скидки
+                        </h5>
+                    </a>
+                    <a href="{% url 'all_gds_page' %}" class="nawhrefs">
+                        <h5>
+                            Новинки
+                        </h5>
+                    </a>
+                </nav>
+                <a href="{% url 'home_page' %}" class="d-flex col-6 col-md-6 justify-content-start justify-content-md-center align-items-md-center" >
+                    <h1 class="txtlogo" style="font-weight: bold">
+                        ALL SIZE
+                    </h1>
+                </a>
+                <div class="icons_mobile align-items-center col-4 justify-content-between">
+                    <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">
+{#                        <img src="{% static 'project/img/search.svg' %}" class="icons_mobile" alt="burgerNav">#}
+
+                    </button>
+                    <a href="{% url 'wishlist_page' %}">
+                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icontip">
+                    </a>
+                    <a href="{% url 'busket_page' %}">
+                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 1.4em; font-size: 1em; color: #FFFFFF">
+                            {{ cart_count }}
+                        </span>
+                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icontip">
+                    </a>
+                </div>
+
+{#                <div class="icons_mobile justify-content-between align-items-center col-4">#}
+{#                    <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">#}
+{#                        <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">#}
+{#                    </button>#}
+{#                    <a href="{% url 'wishlist_page' %}">#}
+{#                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icon">#}
+{#                    </a>#}
+{#                    <a href="{% url 'busket_page' %}">#}
+{#                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 1.4em; font-size: 1em; color: #FFFFFF">#}
+{#                            {{ cart_count }}#}
+{#                        </span>#}
+{#                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icon">#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="searc__ico col-1 justify-content-center align-items-center" onclick="click_open()">#}
+{#                    <a href="#" ><img src="{% static 'project/img/search.svg' %}" class="icontip" alt="search" ></a>#}
+{##}
+{##}
+{#                    <input type="text" id="search-input" class="d-flex col-3" placeholder="Поиск товара">#}
+{#                    <div id="search-results" class="d-flex position-absolute"></div>#}
+{#                </div>#}
+
+{#                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">#}
+{#                    <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">#}
+{#                </button>#}
+
+                <div class="icons col-3 gap-1">
+{#                    <div>#}
+{#                        <img src="{% static 'project/img/search.svg' %}" alt="search" class="icon">#}
+{#                        <input type="text" id="search-input" placeholder="Поиск товара">#}
+{#                        <div id="search-results" class="d-flex position-absolute"></div>#}
+{#                    </div>#}
+                    <div class="d-flex justify-content-center flex-column">
+                        <div class="sr__cont d-flex justify-content-center gap-1">
+                            <input type="text" id="search-input" placeholder="Поиск товара" class="col-md-8 col-lg-10">
+                            <input type="image" src="{% static 'project/img/search.svg' %}" class="icontip" id="product-button">
+                        </div>
+                        <div id="search-results" class="d-flex position-absolute" style="margin-top: 15%; background-color: #FFFFFF; overflow-y: scroll; height: 10em; scrollbar-color: #D0D0D0 #FFFFFF; scrollbar-width: none "></div>
+                    </div>
+
+
+                    <a href="{% url 'wishlist_page' %}">
+                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icon">
+                    </a>
+                    <a href="{% url 'busket_page' %}">
+{#                        <div style="width: 1em; height: 1em; border-radius: 50%; background-color: #a41515; top: -2em; right: -3em; z-index: 7"></div>#}
+                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 2em; font-size: 1em; color: #FFFFFF">
+                            {{ cart_count }}
+                        </span>
+
+                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icon">
+                    </a>
+{#                    <a href="../html/registration.html">#}
+{##}
+{#                        <img src="../img/profile.svg" alt="profile"  class="icon">#}
+{#                    </a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+ <script type="text/javascript">
+
+        document.getElementById('product-button').addEventListener('click', function() {
+            let productName = document.getElementById('search-input').value;
+            if (productName) {
+                window.location.href = '/search/' + encodeURIComponent(productName);
+            }
+        });
+
+        document.getElementById('product-button-mobile').addEventListener('click', function() {
+            let productName = document.getElementById('search-input-mobile').value;
+            if (productName) {
+                window.location.href = '/search/' + encodeURIComponent(productName);
+            }
+        });
+
+        function click_open() {
+
+            setTimeout(1000)
+            let burger = document.querySelector("#offcanvasTop")
+            let slider = document.querySelector("#carouselExample")
+            console.log(burger.classList.contains("showing"))
+            console.log(slider)
+            console.log(burger.classList)
+            if (burger.classList.contains("showing")) slider.style.display = "none"
+            else slider.style.display = "block"
+
+
+        }
+        function click_close(){
+             setTimeout(1000)
+            let burger = document.querySelector("#offcanvasTop")
+            let slider = document.querySelector("#carouselExample")
+            console.log(burger.classList.contains("showing"))
+            console.log(slider)
+            console.log(burger.classList)
+            if (burger.classList.contains("hiding")) slider.style.display = "block"
+        }
+    </script>
+</header>

@@ -5,8 +5,11 @@
         <div class="container">
 
             <div class="row justify-content-between align-items-center mobil">
-                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                    <img src="{% static 'project/img/BurgeNav.svg' %}" alt="burgerNav">
+                <button class="btn btn__burger col-1" style="padding: 0; font-size: unset" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+{#                    <img src="{% static 'project/img/BurgeNav.svg' %}" alt="burgerNav">#}
+                    <div class="burger">
+                      <span></span>
+                    </div>
                 </button>
 
                 <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -14,7 +17,7 @@
                         <!-- <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
                          -->
                          <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-start" >
-                            <h1 class="txtlogo">
+                            <h1 class="txtlogo" style="font-weight: bold">
                                 ALL SIZE
                             </h1>
                         </a>
@@ -22,12 +25,12 @@
                     </div>
                     <div class="offcanvas-body">
                         <div class="burger__menu">
-                            <ul class="d-flex align-content-start flex-column">
-                                <li><a href="{% url 'brands' %}" class="nawhrefs" style="text-align: left"><h5>Бренды</h5></a></li>
-                                <li><a href="{% url 'sale_page' 'sale' %}" class="nawhrefs" style="text-align: left"><h5>Скидки</h5></a></li>
-                                <li><a href="{% url 'all_gds_page' %}" class="nawhrefs" style="text-align: left"><h5>Новинки</h5></a></li>
-                                <li><a href="{% url 'wishlist_page' %}" class="nawhrefs" style="text-align: left"><h5>Избранное</h5></a></li>
-                                <li><a href="{% url 'busket_page' %}" class="nawhrefs" style="text-align: left"><h5>Корзина</h5></a></li>
+                            <ul class="d-flex align-content-start flex-column gap-4">
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'brands' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Бренды</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'sale_page' 'sale' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Скидки</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'all_gds_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Новинки</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'wishlist_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Избранное</h5></a></li>
+                                <li class="d-flex flex-nowrap align-items-center" style="height: 2em"><div class="arrow" ><span></span></div><a href="{% url 'busket_page' %}" class="nawhrefs" style="text-align: left"><h5 style="margin: 0">Корзина</h5></a></li>
                             </ul>
                         </div>
                         <div class="d-flex justify-content-center flex-column" style="margin-top: 2em">
@@ -57,11 +60,42 @@
                         </h5>
                     </a>
                 </nav>
-                <a href="{% url 'home_page' %}" class="d-flex col-10 col-md-6 align-items-center justify-content-center" >
-                    <h1 class="txtlogo">
+                <a href="{% url 'home_page' %}" class="d-flex col-6 col-md-6 justify-content-start justify-content-md-center align-items-md-center" >
+                    <h1 class="txtlogo" style="font-weight: bold">
                         ALL SIZE
                     </h1>
                 </a>
+                <div class="icons_mobile align-items-center col-4 justify-content-between">
+                    <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">
+{#                        <img src="{% static 'project/img/search.svg' %}" class="icons_mobile" alt="burgerNav">#}
+
+                    </button>
+                    <a href="{% url 'wishlist_page' %}">
+                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icontip">
+                    </a>
+                    <a href="{% url 'busket_page' %}">
+                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 1.4em; font-size: 1em; color: #FFFFFF">
+                            {{ cart_count }}
+                        </span>
+                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icontip">
+                    </a>
+                </div>
+
+{#                <div class="icons_mobile justify-content-between align-items-center col-4">#}
+{#                    <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">#}
+{#                        <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">#}
+{#                    </button>#}
+{#                    <a href="{% url 'wishlist_page' %}">#}
+{#                        <img src="{% static 'project/img/heart.svg' %}" alt="heat" class="icon">#}
+{#                    </a>#}
+{#                    <a href="{% url 'busket_page' %}">#}
+{#                        <span class="d-flex justify-content-center" style="width: 1.2em; height: 1.2em;position: absolute ;border-radius: 50%; background-color: red; top: 1.4em; font-size: 1em; color: #FFFFFF">#}
+{#                            {{ cart_count }}#}
+{#                        </span>#}
+{#                        <img src="{% static 'project/img/bag.svg' %}" alt="bag" class="icon">#}
+{#                    </a>#}
+{#                </div>#}
 {#                <div class="searc__ico col-1 justify-content-center align-items-center" onclick="click_open()">#}
 {#                    <a href="#" ><img src="{% static 'project/img/search.svg' %}" class="icontip" alt="search" ></a>#}
 {##}
@@ -69,9 +103,10 @@
 {#                    <input type="text" id="search-input" class="d-flex col-3" placeholder="Поиск товара">#}
 {#                    <div id="search-results" class="d-flex position-absolute"></div>#}
 {#                </div>#}
-                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                    <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">
-                </button>
+
+{#                <button class="btn btn__burger col-1" onclick="click_open()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">#}
+{#                    <img src="{% static 'project/img/search.svg' %}" class="icontip" alt="burgerNav">#}
+{#                </button>#}
 
                 <div class="icons col-3 gap-1">
 {#                    <div>#}
@@ -81,10 +116,10 @@
 {#                    </div>#}
                     <div class="d-flex justify-content-center flex-column">
                         <div class="sr__cont d-flex justify-content-center gap-1">
-                            <input type="text" id="search-input" placeholder="Поиск товара">
+                            <input type="text" id="search-input" placeholder="Поиск товара" class="col-md-8 col-lg-10">
                             <input type="image" src="{% static 'project/img/search.svg' %}" class="icontip" id="product-button">
                         </div>
-                        <div id="search-results" class="d-flex position-absolute" style="margin-top: 55%; background-color: #FFFFFF; "></div>
+                        <div id="search-results" class="d-flex position-absolute" style="margin-top: 15%; background-color: #FFFFFF; overflow-y: scroll; height: 10em; scrollbar-color: #D0D0D0 #FFFFFF; scrollbar-width: none "></div>
                     </div>
 
 
@@ -107,6 +142,7 @@
             </div>
         </div>
     </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script type="text/javascript">
 
         document.getElementById('product-button').addEventListener('click', function() {
@@ -145,5 +181,155 @@
             console.log(burger.classList)
             if (burger.classList.contains("hiding")) slider.style.display = "block"
         }
+
+
+        let burger = document.querySelector("#offcanvasTop")
+        let slider = document.querySelector("#carouselExample")
+        console.log(burger.classList.contains("show"))
+        console.log(slider)
+        if (burger.classList.contains("show")) slider.style.display = "none"
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoriteIcons = document.querySelectorAll('.fav-btn');
+
+            favoriteIcons.forEach(icon => {
+                const productId = icon.dataset.productId;
+
+                fetch(`/is_fav/${productId}/`, {
+                    method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/json',
+                        }
+                } )
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'in_fav') {icon.classList.add('favorited');}
+                })
+
+
+
+
+                icon.addEventListener('click', function() {
+                    fetch(`/add_to_fav/${productId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/json',
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Обновляем интерфейс, например, меняем цвет иконки
+                            {#icon.querySelector(':before').style.background = '#cc0000';#}
+                            {#icon.querySelector(':after').style.background = '#cc0000'#}
+                            {#icon.classList.add('favorited');#}
+                            icon.classList.toggle('favorited');
+
+                            {#icon.style.color = "red"#}
+
+                        }
+                        {#else {icon.classList.remove('favorited')}#}
+                        else {icon.style.fill = '#FFFFF'}
+
+                    });
+                });
+            });
+        });
+
+
+
+        function updateSearchResults(results) {
+            let searchResultsDiv = $('#search-results');
+            searchResultsDiv.empty();  // Очистить результаты поиска
+
+            if (results.length === 0) {
+                {#searchResultsDiv.append('<p>Ничего не найдено</p>');#}
+            } else {
+                let ul = $('<ul></ul>');
+                results.forEach(function(result) {
+                    let a = $(`<a href="/${result.brand_mame}/gds/${result.id}" style="color: black" class="search_item_hower"></a>`).text(result.model_name)
+                    {#let li = $('<li style="color: black"></li>').text(result.model_name);  // Обращение к свойству 'model_name'#}
+                    let li = $('<li style="color: black"></li>').append(a)
+                    ul.append(li);
+                });
+                searchResultsDiv.append(ul);
+            }
+        }
+
+        // Обработка ввода в поле поиска
+        $('#search-input').on('input', function() {
+            let searchTerm = $(this).val();
+            if (searchTerm.length >= 3) {  // Отправлять запрос только если введено более 3 символов
+                $.ajax({
+                    url: '/search/',
+                    method: 'GET',
+                    data: { q: searchTerm },
+                    success: function(response) {
+                        // Обновить результаты поиска на странице
+                        updateSearchResults(response.results);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Ошибка при выполнении поиска: ' + error);
+                    }
+                });
+            }
+        });
+
+        function updateSearchResultsMobile(results) {
+            let searchResultsDiv = $('#search-results-mobile');
+            searchResultsDiv.empty();  // Очистить результаты поиска
+
+            if (results.length === 0) {
+                searchResultsDiv.append('<p>Ничего не найдено</p>');
+            } else {
+                let ul = $('<ul></ul>');
+                results.forEach(function(result) {
+                    let a = $(`<a href="/${result.brand_mame}/gds/${result.id}" style="color: black"></a>`).text(result.model_name)
+                    {#let li = $('<li style="color: black"></li>').text(result.model_name);  // Обращение к свойству 'model_name'#}
+                    let li = $('<li style="color: black"></li>').append(a)
+                    ul.append(li);
+                });
+                searchResultsDiv.append(ul);
+            }
+        }
+
+        // Обработка ввода в поле поиска
+        $('#search-input-mobile').on('input', function() {
+            let searchTerm = $(this).val();
+            if (searchTerm.length >= 3) {  // Отправлять запрос только если введено более 3 символов
+                $.ajax({
+                    url: '/search/',
+                    method: 'GET',
+                    data: { q: searchTerm },
+                    success: function(response) {
+                        // Обновить результаты поиска на странице
+                        updateSearchResultsMobile(response.results);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Ошибка при выполнении поиска: ' + error);
+                    }
+                });
+            }
+        });
+
+
     </script>
 </header>

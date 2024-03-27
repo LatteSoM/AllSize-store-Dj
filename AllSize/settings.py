@@ -17,6 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CART_SESSION_ID = 'cart'
 FAV_SESSION_ID = 'favorites'
+# CSRF_COOKIE_HTTPONLY = True
+# CSRF_COOKIE_SECURE = True
+# CSRF_USE_SESSIONS = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -24,12 +27,12 @@ FAV_SESSION_ID = 'favorites'
 SECRET_KEY = 'django-insecure-g_3xn$as1fw@7jj^6!-8&6-lrf8y%n+_f$33hfd_p736t1vgwa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = ['allsizs.com', '5.35.91.72']
+# ALLOWED_HOSTS = ['allsizs.com', '5.35.91.72']
 
 
 # Application definition
@@ -43,7 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MainApp',
     'busket',
-    'wishlist'
+    'wishlist',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +81,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AllSize.wsgi.application'
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False
+
 
 
 # Database
@@ -95,7 +103,7 @@ DATABASES = {
             'NAME': 'all_size_db',
             'USER': 'postgres',
             'PASSWORD': '86421488',
-            'HOST': 'localhost',
+            'HOST': '5.35.91.72',
             'PORT': '5432'
         }
 }

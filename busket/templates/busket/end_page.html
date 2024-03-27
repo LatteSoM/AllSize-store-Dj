@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row d-flex align-items-center justify-content-center sep">
+        <div class="ordprevcard col-12">
+            <div class="ordprevtxt">
+                <h2 style="font-weight: normal">Спасибо за заказ! <br> В ближайшее время с вами свяжется наш менеджер, для уточнения деталей заказа.</h2>
+                <hr>
+            </div>
+            <div class="row sep align-items-center justify-content-between btn_mobile" style="height: 10em">
+                <a href="{% url 'all_gds_page' %}" class="nawhrefs d-flex justify-content-center navbtnss" style="width: 100%"><button class="navbtnss all_br">Новинки</button></a>
+                <a href="{% url 'brands' %}" class="nawhrefs d-flex justify-content-center navbtnss" style="width: 100%"><button class="navbtnss all_br">Бренды</button></a>
+                <a href="{% url 'sale_page' 'sale' %}" class="nawhrefs d-flex navbtnss" style="width: 100%"><button class="navbtnss all_br">Скидки</button></a>
+                <a href="{% url 'home_page' %}" class="nawhrefs d-flex navbtnss" style="width: 100%"><button class="navbtnss all_br">На главную</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

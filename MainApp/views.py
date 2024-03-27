@@ -1,11 +1,13 @@
 import os
 
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
+
 from .models import *
 from MainApp.form import SortingForm, SizeForm, SaleForm, PriceForm, AddToCartForm, FavoritesForm, AnSizeForm
 from .utils import ord_param
 from busket.views import add_to_cart, get_cart_goods
-from wishlist.views import add_to_favorites
+from wishlist.views import add_to_favorites, remove_from_favorites
 from django.http import JsonResponse
 from AllSize import settings
 
@@ -14,14 +16,27 @@ from AllSize import settings
 
 # Create your views here
 
-
+# @csrf_protect
 def add_fav(request, product_id):
-    add_to_favorites(request, product_id)
+    fav = request.session.get('favorites', {})
+    if str(product_id) in fav:
+        remove_from_favorites(request, product_id)
+    else:
+        add_to_favorites(request, product_id)
     return JsonResponse({'status': 'success'})
 
 
+# @csrf_protect
+def is_fav(request, product_id):
+    fav = request.session.get('favorites', {})
+    if str(product_id) in fav:
+        return JsonResponse({'status': 'in_fav'})
+    else:
+        return JsonResponse({'status': 'not_in_fav'})
+
+
 def info_page(request):
-    return render(request, 'MainApp/info.html')
+    return render(request, 'MainApp/info.html', context={'cart_count': len(get_cart_goods(request))})
 
 
 def search(request):
@@ -125,16 +140,25 @@ def cats_only(request, brand):
     return render(request, 'MainApp/cats.html', context)
 
 
+# @csrf_protect
 def button_view(request):
-    if request.method == 'POST':
-        if 'expensive' in request.POST:
-            return render(request, 'MainApp/brandpage.html', ord_param('-price'))
-        if 'cheaper' in request.POST:
-            return render(request, 'MainApp/brandpage.html', ord_param('price'))
-        if 'sale' in request.POST:
-            return render(request, 'MainApp/brandpage.html', ord_param(sale=True))
-        else:
-            return render(request, 'MainApp/main.html')
+    # if request.method == 'POST':
+    #     if 'expensive' in request.POST:
+    #         return render(request, 'MainApp/brandpage.html', ord_param('-price'))
+    #     if 'cheaper' in request.POST:
+    #         return render(request, 'MainApp/brandpage.html', ord_param('price'))
+    #     if 'sale' in request.POST:
+    #         return render(request, 'MainApp/brandpage.html', ord_param(sale=True))
+    #     else:
+    #         return render(request, 'MainApp/main.html')
+    if 'expensive' in request.GET:
+        return render(request, 'MainApp/brandpage.html', ord_param('-price'))
+    if 'cheaper' in request.GET:
+        return render(request, 'MainApp/brandpage.html', ord_param('price'))
+    if 'sale' in request.GET:
+        return render(request, 'MainApp/brandpage.html', ord_param(sale=True))
+    else:
+        return render(request, 'MainApp/main.html')
 
 
 def goods(request, brand=None, cat=None, search_term=None):
@@ -194,7 +218,7 @@ def goods(request, brand=None, cat=None, search_term=None):
             con_sale = sale_form.cleaned_data['on_sale']
             print(con_sale)
 
-            filtered_queryset = Goods.objects.all()
+            filtered_queryset = Goods.objects.all().order_by('model_name')
             if cat is not None:
                 if cat == 'sale':
                     filtered_queryset = Goods.objects.filter(sale_confirmed=True)
@@ -260,9 +284,11 @@ def create_images(good_id, folder_path):
             Images.objects.create(imga=image_path, good_id=good)
 
 
+# @csrf_protect
 def item_view(request, brand, item_id):
+    # Goods.objects.all().update(price=models.F('price') + 2000)
     good = Goods.objects.get(id=item_id)
-    # create_sizes_to_good(good.pk, ('36', '46'))
+    # create_sizes_to_good(good.pk, ('37', '48'))
     # create_images(good.pk, 'C:/Users/LinQuid/Downloads/1 джорданые низкие/1 джорданые низкие/Air Jordan 1 Low White Camo (36-46) 10.490₽/')
     # print(good.pk, "<--- Good PK")
     form = SizeForm(request.GET, model_name=good.pk)
@@ -289,10 +315,11 @@ def item_view(request, brand, item_id):
                 # return render(request, 'busket/bag.html')
                 return redirect('/card/')
 
-    if request.method == 'POST':
+    # if request.method == 'POST':
+    #     add_to_favorites(request, good.id)
+    #     return redirect('/wish/')
         # favorite_form = FavoritesForm(request.GET)
-        add_to_favorites(request, good.id)
-        return redirect('/wish/')
+
 
         # if favorite_form.is_valid():
         #     con = []

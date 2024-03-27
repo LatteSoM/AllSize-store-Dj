@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row justify-content-center align-items-center sep fict">
+        {% for brand in brands %}
+            {% include 'MainApp/inc/_category_card.html' with brand=brand.brand_name pic=brand.brands_pic.url %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#    <div class="row justify-content-center align-items-center sep fict">#}
+{#        {% if need_to_show_brand == 'True' %}#}
+{#            {% for brand in brands %}#}
+{#                {% include 'MainApp/inc/_category_card.html' with brand=brand %}#}
+{#            {% endfor %}#}
+{##}
+{#            {% else %}#}
+{#                {% for cat in category %}#}
+{#                    {% include 'MainApp/inc/_cat_card.html' with cat_name=cat.category_name brand=category.brand %}#}
+{#                {% endfor %}#}
+{#        {% endif %}#}
+{##}
+{##}
+{#    </div>#}
+{#{% endblock %}#}
+
+{#<a href="/nike/gds/{{ good.id | default:'1' }}" class="cards col-2">#}
+{#    <div class="imgcont">#}
+{#        <img src="{{ good.main_pic.url }}" alt="">#}
+{#        <img src="/media/image/2023-07-10-11-53-58.jpg" alt="">#}
+{#    </div>#}
+{#    <div class="cardtext">#}
+{#        <h3 class="cardbrand">{{ good.brand_id }}</h3>#}
+{#        <h5 class="carddescr">{{ good.model_name }}</h5>#}
+{#        <h4 class="cardprice">{{ good.price }}</h4>#}
+{#    </div>#}
+{#</a>#}
