@@ -16,6 +16,60 @@ from AllSize import settings
 
 # Create your views here
 
+
+from rest_framework import viewsets, permissions
+from .models import Brands
+from .serializers import BrandsSerializer, SizesSerializer, SizeToGoodTablesSerializer, CategorySerializer, GoodssSerializer, ColorsSerializer
+
+
+class BrandsViewSet(viewsets.ModelViewSet):
+    queryset = Brands.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = BrandsSerializer
+
+
+class SizesViewSet(viewsets.ModelViewSet):
+    queryset = Sizes.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = SizesSerializer
+
+
+class SizesToGoodViewSet(viewsets.ModelViewSet):
+    queryset = SizesToGoodTable.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = SizeToGoodTablesSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CategorySerializer
+
+
+class GoodssViewSet(viewsets.ModelViewSet):
+    queryset = Goods.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = GoodssSerializer
+
+
+class ColorViewSet(viewsets.ModelViewSet):
+    queryset = Colors.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ColorsSerializer
+
+
 # @csrf_protect
 def add_fav(request, product_id):
     fav = request.session.get('favorites', {})

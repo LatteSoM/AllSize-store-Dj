@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'wishlist',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -90,22 +91,22 @@ CSRF_COOKIE_HTTPONLY = False
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'all_size_db',
-    #     'USER': 'postgres',
-    #     'PASSWORD': '1234',
-    #     'HOST': 'localhost',
-    #     'PORT': '9000'
-    # }
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'all_size_db',
-            'USER': 'postgres',
-            'PASSWORD': '86421488',
-            'HOST': '5.35.91.72',
-            'PORT': '5432'
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'all_size_db',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '9000'
+    }
+    # 'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': 'all_size_db',
+    #         'USER': 'postgres',
+    #         'PASSWORD': '86421488',
+    #         'HOST': '5.35.91.72',
+    #         'PORT': '5432'
+    #     }
 }
 
 

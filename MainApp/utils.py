@@ -2,6 +2,7 @@ from .models import Goods, Brands
 from django.http import HttpResponseRedirect
 from .form import *
 
+
 def ord_param(param='price', sale=False):
     if param == 'default':
         goods = Goods.objects.all()
