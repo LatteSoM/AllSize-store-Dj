@@ -95,6 +95,7 @@
                     method: 'POST',
                         headers: {
                             'X-CSRFToken': getCookie('csrftoken'),
+                            {#'X-CSRFToken': {{ csrf_token }},#}
                             'Content-Type': 'application/json',
                         }
                 } )
